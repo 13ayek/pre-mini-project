@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -12,7 +14,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-
+        $orders = Order::with('customer','service')->get();
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -20,7 +23,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $customer = Customer::all();
+        $service = Service::all();
+        return view('orders.create', compact('customers','services'));
     }
 
     /**
@@ -28,8 +33,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'service_id' => 'required|exists:services,id',
+            'order_date' => 'required|date',
+            'status' => 'required|in:Pending,In Progress,Completed,Cancelled',
+            'total_price' => 'required|numeric|min:1',
+        ]);
+
+        Order::create($request->all());
+        return redirect()->route('orders.index')->with('success', 'Order created successfully.');
     }
+
 
     /**
      * Display the specified resource.
@@ -44,7 +59,9 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $customers = Customer::all();
+        $service = Service::all();
+        return view('orders.edit', compact('order','customers','services'));
     }
 
     /**
@@ -52,7 +69,15 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'service_id' => 'required|exists:services,id',
+            'order_date' => 'required|date',
+            'status' => 'required|in:Pending,In Progress,Completed,Cancelled',
+            'total_price' => 'required|numeric|min:1',
+        ]);
+        $order->update($request->all());
+        return redirect()->route('orders.index')->with('success','Order Updated Succesfully');
     }
 
     /**
@@ -60,6 +85,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect()->route('orders.index')->with('success','Order Deleted Succesfully');
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
@@ -31,7 +31,7 @@ class ServiceController extends Controller
     {
         $request->validate([
             'service_name'=> ['required','string','max:255'],
-            'description' => ['nullable','max:255'],
+            'description' => ['nullable','string','max:255'],
             'price'       => ['required','numeric','min:1'],
         ]);
         Service::create($request->all());
@@ -62,7 +62,7 @@ class ServiceController extends Controller
     {
         $request->validate([
             'service_name'=> ['required','string','max:255'],
-            'description' => ['nullable','max:255'],
+            'description' => ['nullable','string','max:255'],
             'price'       => ['required','numeric','min:1'],
         ]);
         $service->update($request->all());
