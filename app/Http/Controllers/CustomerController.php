@@ -87,6 +87,15 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+        if ($customer->orders()->count() > 0) {
+            // Jika masih ada orders, berikan pesan error
+            return redirect()->route('customers.index')
+                             ->with('error', 'Customers cannot be deleted because they still have orders');
+        }
 
+        $customer->delete();
+
+        return redirect()->route('customers.index')->with('success','Customer Deleted Successfully');
     }
+    
 }
