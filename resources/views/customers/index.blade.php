@@ -16,7 +16,6 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Photo</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>

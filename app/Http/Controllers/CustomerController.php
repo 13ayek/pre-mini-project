@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
@@ -29,13 +30,21 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCustomerRequest $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email'=> 'required|email|max:255|unique:customers,email,except,id',
-            'phone' => 'required|integer|max:12|unique:customers,phone,except,id',
-            'address' => 'required|string|max:255',
+            'phone' => ['required','string','max:12','regex:/^[0-9]+$/','unique:customers,phone,except,id'],
+            'address' => 'required|text|max:255',
+        ],[
+            'name.required' => 'Name is required',
+            'name.unique'=> 'This Name is already taken',
+            'email.required' => 'Email is required',
+            'email.unique' => 'This email is already taken',
+            'phone.required' => 'Phone number is required',
+            'phone.regex' => 'The phone number value cannot be below 0',
+            'phone.unique'=> 'This phone number is already taken',
         ]);
 
         Customer::create($request->all());
@@ -62,13 +71,13 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCustomerRequest $request, Customer $customer)
+    public function update(Request $request, Customer $customer)
     {
         $request->validate([
             'name'=> 'required|string|max:255',
             'email' => ['required','email',Rule::unique('customers')->ignore($customer->id)],
-            'phone' => ['required','integer','max:12', 'regex:/^[0-9]+$/',Rule::unique('customers')->ignore($customer->id)],
-            'address' => ['required','string','max:255'],
+            'phone' => ['required','string','max:12', 'regex:/^[0-9]+$/',Rule::unique('customers')->ignore($customer->id)],
+            'address' => ['required','text','max:255'],
         ],
         [
             'name.required' => 'Name is required',
@@ -97,5 +106,5 @@ class CustomerController extends Controller
 
         return redirect()->route('customers.index')->with('success','Customer Deleted Successfully');
     }
-    
+
 }
