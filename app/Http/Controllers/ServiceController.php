@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-use App\Http\Requests\StoreServiceRequest;
-use App\Http\Requests\UpdateServiceRequest;
 use Illuminate\Support\Facades\Request;
 
 class ServiceController extends Controller
@@ -29,11 +27,11 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreServiceRequest $request)
+    public function store(Request $request)
     {
         $request->validate([
             'service_name'=> ['required','string','max:255'],
-            'description' => ['required'],
+            'description' => ['nullable','max:255'],
             'price'       => ['required','numeric','min:1'],
         ]);
         Service::create($request->all());
@@ -60,11 +58,11 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateServiceRequest $request, Service $service)
+    public function update(Request $request, Service $service)
     {
         $request->validate([
             'service_name'=> ['required','string','max:255'],
-            'description' => ['required'],
+            'description' => ['nullable','max:255'],
             'price'       => ['required','numeric','min:1'],
         ]);
         $service->update($request->all());

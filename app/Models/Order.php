@@ -21,4 +21,18 @@ class Order extends Model
         return $this->belongsTo(Service::class);
     }
 
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function laundryItems()
+    {
+        return $this->hasMany(LaundryItem::class);
+    }
+
+    public function employeeAssignments()
+    {
+        return $this->hasMany(EmployeeAssignment::class);
+    }
 }

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LaundryItem;
-use App\Http\Requests\StoreLaundryItemsRequest;
-use App\Http\Requests\UpdateLaundryItemsRequest;
+use Illuminate\Http\Request;
 
 class LaundryItemController extends Controller
 {
@@ -27,7 +26,7 @@ class LaundryItemController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreLaundryItemsRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -51,7 +50,7 @@ class LaundryItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLaundryItemsRequest $request, LaundryItem $laundryItem)
+    public function update(Request $request, LaundryItem $laundryItem)
     {
         //
     }

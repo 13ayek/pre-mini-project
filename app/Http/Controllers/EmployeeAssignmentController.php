@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmployeeAssignment;
-use App\Http\Requests\StoreEmployeeAssignmentRequest;
-use App\Http\Requests\UpdateEmployeeAssignmentRequest;
+use Illuminate\Http\Request;
 
 class EmployeeAssignmentController extends Controller
 {
@@ -27,7 +26,7 @@ class EmployeeAssignmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEmployeeAssignmentRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -51,7 +50,7 @@ class EmployeeAssignmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEmployeeAssignmentRequest $request, EmployeeAssignment $employeeAssignment)
+    public function update(Request $request, EmployeeAssignment $employeeAssignment)
     {
         //
     }
