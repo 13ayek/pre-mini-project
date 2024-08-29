@@ -1,45 +1,47 @@
 @extends('layouts.app')
-@section('content')
-    <main>
 
-        <div class="container mt-5">
-            <div class="container">
-                <a href="{{ route('customers.create') }}" type="button" class="btn btn-outline-info mb-3">Tambah</a>
+@section('content')
+    <div class="container">
+        <h1>Create Customer!</h1>
+
+        <form action="{{ route('customers.store') }}" method="POST">
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
-            <table class="table table-bordered border-primary">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Photo</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($customers as $customer)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $customer->name }}</td>
-                            <td>{{ $customer->email }}</td>
-                            <td>{{ $customer->phone }}</td>
-                            <td>{{ $customer->address }}</td>
-                            <td>
-                                <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('customers.destroy', $customer->id) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Apakah Anda yakin ingin menghapus penumpang ini?');">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </main>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif  
+            @csrf
+
+
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Customers name</label>
+                <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="number" name="phone" class="form-control" id="phone" value="{{ old('phone') }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" name="address" class="form-control" id="address" value="{{ old('address') }}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{{ route('customers.index') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
 @endsection
