@@ -7,6 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-route::resource([
-    'customers' => CustomerController::class,
+Route::resources([
+    'customers'=> CustomerController::class,
 ]);
