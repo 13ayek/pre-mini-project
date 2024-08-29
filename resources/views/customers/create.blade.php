@@ -5,20 +5,18 @@
         <h1>Create Customer!</h1>
 
         <form action="{{ route('customers.store') }}" method="POST">
-            @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif  
             @csrf
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
 
-
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
 
             <div class="mb-3">
                 <label for="name" class="form-label">Customers name</label>
