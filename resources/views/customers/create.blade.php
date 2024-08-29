@@ -1,22 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<main>
     <div class="container">
-        <h1>Create Customer!</h1>
+        <h1>Create Customer</h1>
 
         <form action="{{ route('customers.store') }}" method="POST">
             @csrf
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
-
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
 
             <div class="mb-3">
                 <label for="name" class="form-label">Customers name</label>
@@ -35,11 +25,12 @@
 
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                <input type="text" name="address" class="form-control" id="address" value="{{ old('address') }}">
+                <input type="textarea" name="address" class="form-control" id="address" value="{{ old('address') }}">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
             <a href="{{ route('customers.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
+</main>
 @endsection
