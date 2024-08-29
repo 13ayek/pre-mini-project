@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
+use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
 {
@@ -30,7 +31,16 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email'=> 'required|email|max:255|unique:customers,email,except,id',
+            'phone' => 'required|integer|max:12|unique:customers,phone,except,id',
+            'address' => 'required|string|max:255',
+        ]);
+
+        Customer::create($request->all());
+
+        return redirect()->route('customers.index')->with('success','Customer Created Successfully');
     }
 
     /**
@@ -46,7 +56,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -54,7 +64,6 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        //
     }
 
     /**
@@ -62,6 +71,6 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+
     }
 }
