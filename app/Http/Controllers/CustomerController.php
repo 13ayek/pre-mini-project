@@ -34,7 +34,7 @@ class CustomerController extends Controller
             'name' => 'required|string|max:255',
             'email'=> 'required|email|max:255|unique:customers,email,except,id',
             'phone' => ['required','string','max:12','regex:/^[0-9]+$/','unique:customers,phone,except,id'],
-            'address' => 'required|text|max:255',
+            'address' => 'required|string|max:255',
         ],[
             'name.required' => 'Name is required',
             'name.unique'=> 'This Name is already taken',
@@ -75,7 +75,7 @@ class CustomerController extends Controller
             'name'=> 'required|string|max:255',
             'email' => ['required','email',Rule::unique('customers')->ignore($customer->id)],
             'phone' => ['required','string','max:12', 'regex:/^[0-9]+$/',Rule::unique('customers')->ignore($customer->id)],
-            'address' => ['required','text','max:255'],
+            'address' => ['required','string','max:255'],
         ],
         [
             'name.required' => 'Name is required',

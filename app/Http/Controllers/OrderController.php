@@ -25,7 +25,7 @@ class OrderController extends Controller
     {
         $customer = Customer::all();
         $service = Service::all();
-        return view('orders.create', compact('customers','services'));
+        return view('orders.create', compact('customer','service'));
     }
 
     /**
