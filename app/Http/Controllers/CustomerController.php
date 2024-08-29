@@ -64,6 +64,22 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
+        $request->validate([
+            'name'=> 'required|string|max:255',
+            'email' => ['required','email',Rule::unique('customers')->ignore($customer->id)],
+            'phone' => ['required','integer','max:12', 'regex:/^[0-9]+$/',Rule::unique('customers')->ignore($customer->id)],
+            'address' => ['required','string','max:255'],
+        ],
+        [
+            'name.required' => 'Name is required',
+            'email.required' => 'Email is required',
+            'email.unique' => 'This email is already taken',
+            'phone.required' => 'Phone number is required',
+            'phone.regex' => 'The phone number value cannot be below 0',
+            'phone.unique'=> 'This phone number is already taken',
+        ]);
+        $customer->update($request->all());
+        return redirect()->route('customers.index')->with('success','Customer Updated Successfully');
     }
 
     /**
