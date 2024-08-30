@@ -41,19 +41,19 @@
                             <a class="nav-link" href="{{ route('services.index') }}">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customers.index') }}">Orders</a>
+                            <a class="nav-link" href="{{ route('orders.index') }}">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customers.index') }}">Payments</a>
+                            <a class="nav-link" href="{{ route('payments.index') }}">Payments</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customers.index') }}">Loundy Items</a>
+                            <a class="nav-link" href="{{ route('laundryItems.index') }}">Laundry Items</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customers.index') }}">Employees</a>
+                            <a class="nav-link" href="{{ route('employees.index') }}">Employees</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customers.index') }}">Employee Assignments</a>
+                            <a class="nav-link" href="{{ route('employeesAssignments.index') }}">Employee Assignments</a>
                         </li>
 
                     </ul>
