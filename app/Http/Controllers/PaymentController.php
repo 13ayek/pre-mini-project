@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payments = Payment::with('order')->get();
+        return view('payments.index', compact('payments'));
     }
 
     /**
@@ -20,7 +22,8 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        $orders = Order::all();
+        return view('payments.create', compact('orders'));
     }
 
     /**
@@ -28,7 +31,17 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'order_id' => 'required|exists:orders,id',
+            'payment_method' => 'required|in:Cash,Bank Transfer,Credit Card,E-Wallet',
+            'amount' => 'required|numeric|min:1',
+            'payment_date' => 'required|date',
+            'status' => 'required|in:Pending,Completed,Failed',
+        ]);
+
+        Payment::create($request->all());
+        return redirect()->route('payments.index')->with('success','Payment Created Successfully');
+
     }
 
     /**
@@ -44,7 +57,8 @@ class PaymentController extends Controller
      */
     public function edit(Payment $payment)
     {
-        //
+        $order = Order::all();
+        return view('orders.edit', compact('payment','order'));
     }
 
     /**
@@ -52,7 +66,15 @@ class PaymentController extends Controller
      */
     public function update(Request $request, Payment $payment)
     {
-        //
+        $request->validate([
+            'order_id' => 'required|exists:orders,id',
+            'payment_method' => 'required|in:Cash,Bank Transfer,Credit Card,E-Wallet',
+            'amount' => 'required|numeric',
+            'payment_date' => 'required|date',
+            'status' => 'required|in:Pending,Completed,Failed',
+        ]);
+        $payment->update($request->all());
+        return redirect()->route('payments.index')->with('success','Payment Updated Succesfully');
     }
 
     /**
@@ -60,6 +82,7 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment)
     {
-        //
+        $payment->delete();
+        return redirect()->route('payments.index')->with('success','Payment Deleted Succesfully');
     }
 }

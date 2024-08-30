@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\EmployeeAssignment;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class EmployeeAssignmentController extends Controller
@@ -12,7 +14,8 @@ class EmployeeAssignmentController extends Controller
      */
     public function index()
     {
-        //
+        $employeeAssignments = EmployeeAssignment::with('employee','orders')->get();
+        return view('employeeAssignments.index', compact('employeeAssignments'));
     }
 
     /**
@@ -20,7 +23,9 @@ class EmployeeAssignmentController extends Controller
      */
     public function create()
     {
-        //
+        $employees = Employee::all();
+        $orders = Order::all();
+        return view('employeeAssignment.create', compact('employees','orders'));
     }
 
     /**
@@ -28,7 +33,13 @@ class EmployeeAssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'employee_id' => 'required|exists:employees,id',
+            'order_id' => 'required|exists:orders,id',
+            'assigned_date' => 'required|date',
+        ]);
+        EmployeeAssignment::create($request->all());
+        return redirect()->route('employeeAssignment.index')->with('success','Employee Assignment Created Succesfully');
     }
 
     /**
@@ -44,7 +55,9 @@ class EmployeeAssignmentController extends Controller
      */
     public function edit(EmployeeAssignment $employeeAssignment)
     {
-        //
+        $employees = Employee::all();
+        $orders = Order::all();
+        return view('employeeAssignments', compact('employeeAssignment','orders','employees'));
     }
 
     /**
@@ -52,7 +65,13 @@ class EmployeeAssignmentController extends Controller
      */
     public function update(Request $request, EmployeeAssignment $employeeAssignment)
     {
-        //
+        $request->validate([
+            'employee_id' => 'required|exists:employees,id',
+            'order_id' => 'required|exists:orders,id',
+            'assigned_date' => 'required|date',
+        ]);
+        $employeeAssignment->update($request->all());
+        return redirect()->route('employeeAssignments.index')->with('success','Employee Assignment Updated Succesfully');
     }
 
     /**
@@ -60,6 +79,7 @@ class EmployeeAssignmentController extends Controller
      */
     public function destroy(EmployeeAssignment $employeeAssignment)
     {
-        //
+        $employeeAssignment->delete();
+        return redirect()->route('employeeAssignments.')->with('success','Employee Assignment Deleted Succesfully');
     }
 }

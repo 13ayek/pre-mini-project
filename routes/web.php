@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EmployeeAssignmentController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LaundryItemController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,11 +20,11 @@ Auth::routes();
 route::resources([
     'customers'=> CustomerController::class,
     'services' => ServiceController::class,
-    'orders' => ServiceController::class,
-    'payments' => ServiceController::class,
-    'laundryItems' => ServiceController::class,
-    'employees' => ServiceController::class,
-    'employeesAssignments' => ServiceController::class,
+    'orders' => OrderController::class,
+    'payments' => PaymentController::class,
+    'laundryItems' => LaundryItemController::class,
+    'employees' => EmployeeController::class,
+    'employeesAssignments' => EmployeeAssignmentController::class,
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
