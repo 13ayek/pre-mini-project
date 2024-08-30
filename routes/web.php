@@ -24,7 +24,7 @@ route::resources([
     'payments' => PaymentController::class,
     'laundryItems' => LaundryItemController::class,
     'employees' => EmployeeController::class,
-    'employeesAssignments' => EmployeeAssignmentController::class,
+    'employeeAssignments' => EmployeeAssignmentController::class,
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

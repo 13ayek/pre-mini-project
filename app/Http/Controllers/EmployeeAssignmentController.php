@@ -25,7 +25,7 @@ class EmployeeAssignmentController extends Controller
     {
         $employees = Employee::all();
         $orders = Order::all();
-        return view('employeeAssignment.create', compact('employees','orders'));
+        return view('employeeAssignments.create', compact('employees','orders'));
     }
 
     /**

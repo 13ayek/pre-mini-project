@@ -53,7 +53,7 @@
                             <a class="nav-link" href="{{ route('employees.index') }}">Employees</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('employeesAssignments.index') }}">Employee Assignments</a>
+                            <a class="nav-link" href="{{ route('employeeAssignments.index') }}">Employee Assignments</a>
                         </li>
 
                     </ul>
