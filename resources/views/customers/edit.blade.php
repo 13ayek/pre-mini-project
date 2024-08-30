@@ -21,7 +21,7 @@
 
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone</label>
-                        <input type="number" max="12" name="phone" class="form-control" id="phone" value="{{ $customer->phone }}">
+                        <input type="number" name="phone" class="form-control" id="phone" value="{{ $customer->phone }}">
                     </div>
 
                     <div class="mb-3">

@@ -14,7 +14,8 @@
                 <select name="customer_id" class="form-control" id="customer_id">
                     <option value="" disabled> - </option>
                     @foreach ($customers as $customer)
-                        <option value="{{ $customer->id }}" {{ ('customer_id', $order->customer_id) == $customer->id ? 'selected' : '' }}>
+                        <option value="{{ $customer->id }}"
+                            {{ $order->customer_id == $customer->id ? 'selected' : '' }}>
                             {{ $customer->name }}
                         </option>
                     @endforeach
@@ -26,7 +27,8 @@
                 <select name="service_id" class="form-control" id="service_id">
                     <option value="" disabled> - </option>
                     @foreach ($services as $service)
-                        <option value="{{ $service->id }}" {{ ('service_id', $order->service_id) == $service->id ? 'selected' : '' }}>
+                        <option value="{{ $service->id }}"
+                            {{ $order->service_id == $service->id ? 'selected' : '' }}>
                             {{ $service->name }}
                         </option>
                     @endforeach
@@ -35,25 +37,25 @@
 
             <div class="mb-3">
                 <label for="order_date" class="form-label">Order Date</label>
-                <textarea name="order_date" class="form-control" id="order_date">{{ ('order_date', $order->order_date) }}</textarea>
+                <input type="date" name="order_date" class="form-control" id="order_date" value="{{ $order->order_date }}">
             </div>
 
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
                 <select name="status" class="form-control" id="status">
-                    <option value="Pending" {{ ('status', $order->status) == 'Pending' ? 'selected' : '' }}>Pending</option>
-                    <option value="In Progress" {{ ('status', $order->status) == 'In Progress' ? 'selected' : '' }}>In Progress</option>
-                    <option value="Completed" {{ ('status', $order->status) == 'Completed' ? 'selected' : '' }}>Completed</option>
-                    <option value="Cancelled" {{ ('status', $order->status) == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
+                    <option value="Pending" {{ $order->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                    <option value="In Progress" {{ $order->status == 'In Progress' ? 'selected' : '' }}>In Progress</option>
+                    <option value="Completed" {{ $order->status == 'Completed' ? 'selected' : '' }}>Completed</option>
+                    <option value="Cancelled" {{ $order->status == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="total_price" class="form-label">Total Price</label>
-                <input type="number" name="total_price" class="form-control" id="total_price" value="{{ old('total_price', $order->total_price) }}">
+                <input type="number" name="total_price" class="form-control" id="total_price" value="{{ $order->total_price }}">
             </div>
 
-            <button type="submit" class="btn btn-primary">Update Order</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
             <a href="{{ route('orders.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
