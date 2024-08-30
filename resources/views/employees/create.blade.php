@@ -9,31 +9,23 @@
             @csrf
 
             <div class="mb-3">
-                <label for="order_id" class="form-label">Order:</label>
-                <select name="order_id" class="form-control" id="order_id">
-                    <option value="" disabled selected> - </option>
-                    @foreach ($orders as $order)
-                        <option value="{{ $order->id }}"
-                            {{ old('order_id') == $order->id ? 'selected' : '' }}>
-                            {{ $order->name }}
-                        </option>
-                    @endforeach
-                </select>
+                <label for="name" class="form-label">Name :</label>
+                <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}">
             </div>
 
             <div class="mb-3">
-                <label for="item_name" class="form-label">Item Name :</label>
-                <input type="text" name="item_name" class="form-control" id="item_name" value="{{ old('item_name') }}">
+                <label for="phone_number" class="form-label">Phone Number :</label>
+                <input type="number" name="phone_number" class="form-control" id="phone_number" value="{{ old('phone_number') }}">
             </div>
 
             <div class="mb-3">
-                <label for="quantity" class="form-label">Quantity :</label>
-                <input type="number" name="quantity" class="form-control" id="quantity" value="{{ old('quantity') }}">
+                <label for="position" class="form-label">Position :</label>
+                <input type="text" name="position" class="form-control" id="position" value="{{ old('position') }}">
             </div>
 
             <div class="mb-3">
-                <label for="weight" class="form-label">Weight :</label>
-                <input type="number" name="weight" class="form-control" id="weight" value="{{ old('weight') }}">
+                <label for="hire_date" class="form-label">Hire Date :</label>
+                <input type="text" name="hire_date" class="form-control" id="hire_date" value="{{ old('hire_date') }}">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

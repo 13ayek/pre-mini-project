@@ -3,42 +3,34 @@
 @section('content')
 <main>
     <div class="container">
-        <h1>Edit Laundry Item</h1>
+        <h1>Edit Employee</h1>
 
-        <form action="{{ route('laundyItems.update', $laundryItem->id) }}" method="POST">
+        <form action="{{ route('employees.update', $employee->id) }}" method="POST">
             @csrf
-            @method('PUT')
+            @method('PUT') <!-- Directive untuk HTTP PUT -->
 
             <div class="mb-3">
-                <label for="order_id" class="form-label">Order:</label>
-                <select name="order_id" class="form-control" id="order_id">
-                    <option value="" disabled> - </option>
-                    @foreach ($orders as $order)
-                        <option value="{{ $order->id }}"
-                            {{ $laundryItem->order_id == $order->id ? 'selected' : '' }}>
-                            {{ $order->name }}
-                        </option>
-                    @endforeach
-                </select>
+                <label for="name" class="form-label">Name :</label>
+                <input type="text" name="name" class="form-control" id="name" value="{{ $employee->name }}">
             </div>
 
             <div class="mb-3">
-                <label for="item_name" class="form-label">Item Name:</label>
-                <input type="text" name="item_name" class="form-control" id="item_name" value="{{ $laundryItem->item_name }}">
+                <label for="phone_number" class="form-label">Phone Number :</label>
+                <input type="number" name="phone_number" class="form-control" id="phone_number" value="{{ $employee->phone_number }}">
             </div>
 
             <div class="mb-3">
-                <label for="quantity" class="form-label">Quantity:</label>
-                <input type="number" name="quantity" class="form-control" id="quantity" value="{{ $laundryItem->quantity }}">
+                <label for="position" class="form-label">Position :</label>
+                <input type="text" name="position" class="form-control" id="position" value="{{ $employee->position }}">
             </div>
 
             <div class="mb-3">
-                <label for="weight" class="form-label">Weight:</label>
-                <input type="number" name="weight" class="form-control" id="weight" value="{{ $laundryItem->weight }}">
+                <label for="hire_date" class="form-label">Hire Date :</label>
+                <input type="text" name="hire_date" class="form-control" id="hire_date" value="{{ $employee->hire_date }}">
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>
-            <a href="{{ route('laundyItems.index') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('employees.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </main>
