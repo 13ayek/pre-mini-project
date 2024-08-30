@@ -1,14 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <main>
-        <header class="py-3 mb-4 border-bottom">
-            <div class="container d-flex flex-wrap justify-content-start">
-                <a href="/services" class="d-flex align-items-center mb-3 mb-lg-0 text-dark text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                    <span class="fs-4">payment</span>
-                </a>
+        <div class="card">
+            <div class="card-header">
+                <h1>Payments</h1>
             </div>
-        </header>
+        </div>
 
         <div class="container mt-5">
             <div class="container">
