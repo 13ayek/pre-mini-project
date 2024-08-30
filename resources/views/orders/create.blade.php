@@ -12,7 +12,7 @@
                 <label for="customer_id" class="form-label">Customer:</label>
                 <select name="customer_id" class="form-control" id="customer_id">
                     <option value="" disabled selected> - </option>
-                    @foreach ($customers as $customer)
+                    @foreach ($customer as $customer)
                         <option value="{{ $customer->id }}"
                             {{ old('customer_id') == $customer->id ? 'selected' : '' }}>
                             {{ $customer->name }}
@@ -25,7 +25,7 @@
                 <label for="service_id" class="form-label">Service:</label>
                 <select name="service_id" class="form-control" id="service_id">
                     <option value="" disabled selected> - </option>
-                    @foreach ($services as $service)
+                    @foreach ($service as $service)
                         <option value="{{ $service->id }}"
                             {{ old('service_id') == $service->id ? 'selected' : '' }}>
                             {{ $service->name }}
@@ -36,7 +36,7 @@
 
             <div class="mb-3">
                 <label for="order_date" class="form-label">order_date</label>
-                <textarea name="order_date" class="form-control" id="order_date">{{ old('order_date') }}</textarea>
+                <input type="date" name="order_date" class="form-control" id="order_date" {{ old('order_date') }}>
             </div>
 
             <div>
@@ -48,11 +48,6 @@
                         <option value="Completed" {{ old('status') == 'Completed' ? 'selected' : '' }}>Completed</option>
                         <option value="Cancelled" {{ old('status') == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
                 </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="order_date" class="form-label">order_date</label>
-                <input type="date" name="order_date" class="form-control" id="order_date" value="{{ old('order_date') }}">
             </div>
 
             <div class="mb-3">

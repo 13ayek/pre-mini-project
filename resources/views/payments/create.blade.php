@@ -3,7 +3,7 @@
 @section('content')
 <main>
     <div class="container">
-        <h1>Create Customer</h1>
+        <h1>Create Payment</h1>
 
         <form action="{{ route('customers.store') }}" method="POST">
             @csrf
@@ -25,10 +25,11 @@
                 <div class="mb-3">
                     <label for="payment_method" class="form-label">payment_method</label>
                     <select name="payment_method" class="form-control" id="payment_method">
-                        <option value="Cash" {{ old('payment_method') == 'Cash' ? 'selected' : '' }}>Pending</option>
-                        <option value="Bank Transfer" {{ old('payment_method') == 'Bank Transfer' ? 'selected' : '' }}>In Progress</option>
-                        <option value="Credit Card" {{ old('payment_method') == 'Credit Card' ? 'selected' : '' }}>Completed</option>
-                        <option value="E-Wallet" {{ old('payment_method') == 'E-Wallet' ? 'selected' : '' }}>Cancelled</option>
+                        <option value="" disabled selected> - </option>
+                        <option value="Cash" {{ old('payment_method') == 'Cash' ? 'selected' : '' }}>Cash</option>
+                        <option value="Bank Transfer" {{ old('payment_method') == 'Bank Transfer' ? 'selected' : '' }}>Bank Transfer</option>
+                        <option value="Credit Card" {{ old('payment_method') == 'Credit Card' ? 'selected' : '' }}>Credit Card</option>
+                        <option value="E-Wallet" {{ old('payment_method') == 'E-Wallet' ? 'selected' : '' }}>E-Wallet</option>
                 </select>
             </div>
 
@@ -46,6 +47,7 @@
                 <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select name="status" class="form-control" id="status">
+                        <option value="" disabled selected> - </option>
                         <option value="Pending" {{ old('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
                         <option value="In Progress" {{ old('status') == 'In Progress' ? 'selected' : '' }}>In Progress</option>
                         <option value="Completed" {{ old('status') == 'Completed' ? 'selected' : '' }}>Completed</option>
