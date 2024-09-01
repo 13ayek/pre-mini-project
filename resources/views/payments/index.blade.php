@@ -10,9 +10,11 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Order</th>
+                        <th>Order Name</th>
                         <th>Payment Method</th>
-                        <th>Amount</th>
+                        <th>Money Paid Off</th>
+                        <th>Total</th>
+                        <th>Refund</th>
                         <th>Payment Date</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -22,11 +24,13 @@
                     @foreach ($payments as $payment)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $payment->orders->order_id }}</td>
+                            <td>{{ $payment->order->customer->name }}</td>
                             <td>{{ $payment->payment_method }}</td>
-                            <td>{{ $payment->amount }}</td>
+                            <td>Rp. {{ number_format($payment->amount, 2, ',', '.') }}</td>
+                            <td>Rp. {{ number_format($payment->order->total_price, 2,',','.') }}</td>
+                            <td>Rp. {{ number_format($payment->refund, 2, ',', '.') }}</td>
                             <td>{{ $payment->payment_date }}</td>
-                            <td>{{ $payment->status }}</td>
+                            <td>{{ $payment->order->status }}</td>
                             <td>
                                 <a href="{{ route('payments.edit', $payment->id) }}"
                                     class="btn btn-warning btn-sm">Edit</a>

@@ -60,7 +60,7 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $customers = Customer::all();
-        $service = Service::all();
+        $services = Service::all();
         return view('orders.edit', compact('order','customers','services'));
     }
 
@@ -76,6 +76,7 @@ class OrderController extends Controller
             'status' => 'required|in:Pending,In Progress,Completed,Cancelled',
             'total_price' => 'required|numeric|min:1',
         ]);
+        // dd($request->all());
         $order->update($request->all());
         return redirect()->route('orders.index')->with('success','Order Updated Succesfully');
     }
