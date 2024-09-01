@@ -10,7 +10,7 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Customer</th>
+                        <th>Order Name</th>
                         <th>Payment Method</th>
                         <th>Money Paid Off</th>
                         <th>Total</th>
