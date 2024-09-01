@@ -1,15 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('content')
     <main>
-        <div class="card">
-            <div class="card-header">
-                <h1>Orders</h1>
-            </div>
-        </div>
-
         <div class="container mt-5">
             <div class="container">
+            <h1>Order</h1><br>
                 <a href="{{ route('orders.create') }}" type="button" class="btn btn-outline-info mb-3">Add</a>
             </div>
             <table class="table table-bordered">
@@ -28,11 +23,11 @@
                     @foreach ($orders as $order)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $order->customer->customer_id }}</td>
-                            <td>{{ $order->service->service_id }}</td>
+                            <td>{{ $order->customer->name }}</td>
+                            <td>{{ $order->service->service_name  }}</td>
                             <td>{{ $order->order_date }}</td>
                             <td>{{ $order->status }}</td>
-                            <td>{{ $order->total_price }}</td>
+                            <td>Rp. {{ $order->total_price }}</td>
                             <td>
                                 <a href="{{ route('orders.edit', $order->id) }}"
                                     class="btn btn-warning btn-sm">Edit</a>
