@@ -8,7 +8,7 @@
         </div>
 
         <div class="row mt-3">
-            <form action="{{ route('customers.update', $customer->id) }}" method="POST">
+            <form action="{{ route('payments.update', $customer->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <form action="{{ route('customers.store') }}" method="POST">

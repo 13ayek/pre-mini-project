@@ -17,116 +17,107 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-
 </head>
 
 <body>
     <div id="app">
-        <div class="d-flex">
-            <!-- Sidebar with Shadow -->
-            <nav id="sidebar" class="bg-light border-end shadow-lg">
-                <div class="sidebar-header p-3">
-                    <a class="navbar-brand" href="{{ url('home') }}">CleanDream</a>
-                </div>
-                <ul class="nav flex-column p-3">
-                    @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customers.index') }}">Customers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('services.index') }}">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('orders.index') }}">Orders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('payments.index') }}">Payments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('laundryItems.index') }}">Laundry Items</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('employees.index') }}">Employees</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('employeeAssignments.index') }}">Employee Assignments</a>
-                        </li>
-                    @endauth
-                </ul>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('home') }}">
+                    CleanDream
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                <!-- Authentication Links -->
-                <ul class="nav flex-column p-3 mt-auto">
-                    @guest
-                        @if (Route::has('login'))
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav me-auto">
+                        @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('customers.index') }}">Customers</a>
                             </li>
-                        @endif
-
-                        @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('services.index') }}">Services</a>
                             </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('orders.index') }}">Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('payments.index') }}">Payments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('laundryItems.index') }}">Laundry Items</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('employees.index') }}">Employees</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('employeeAssignments.index') }}">Employee Assignments</a>
+                            </li>
+                        @endauth
+                    </ul>
 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </nav>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
 
-            <!-- Page Content -->
-            <div class="content flex-grow-1">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                <main class="py-2">
-                    @yield('content')
-                </main>
-
-                <style>
-                    html, body {
-                        height: 100%;
-                    }
-                    .d-flex {
-                        height: 100vh; /* Set the height to 100% of the viewport height */
-                    }
-                    #sidebar {
-                        height: 100vh; /* Sidebar height to fill the viewport */
-                    }
-                    .content {
-                        overflow-y: auto; /* Allows content to be scrollable if it exceeds the view */
-                    }
-                </style>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
             </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container mt-4">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <main class="py-4">
+                @yield('content')
+            </main>
         </div>
     </div>
 </body>

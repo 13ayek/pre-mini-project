@@ -5,7 +5,7 @@
     <div class="container">
         <h1>Edit Laundry Item</h1>
 
-        <form action="{{ route('laundyItems.update', $laundryItem->id) }}" method="POST">
+        <form action="{{ route('employeeAssignments.update', $laundryItem->id) }}" method="POST">
             @csrf
             @method('PUT')
 

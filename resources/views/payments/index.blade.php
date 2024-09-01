@@ -1,14 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.base')
 @section('content')
     <main>
-        <div class="card">
-            <div class="card-header">
-                <h1>Payments</h1>
-            </div>
-        </div>
-
         <div class="container mt-5">
             <div class="container">
+            <h1>Payment</h1><br>
                 <a href="{{ route('payments.create') }}" type="button" class="btn btn-outline-info mb-3">Add</a>
             </div>
             <table class="table table-bordered">

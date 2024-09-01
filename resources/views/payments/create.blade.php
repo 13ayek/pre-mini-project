@@ -5,7 +5,7 @@
     <div class="container">
         <h1>Create Payment</h1>
 
-        <form action="{{ route('customers.store') }}" method="POST">
+        <form action="{{ route('payments.store') }}" method="POST">
             @csrf
 
             <div class="mb-3">
@@ -15,7 +15,7 @@
                     @foreach ($orders as $order)
                         <option value="{{ $order->id }}"
                             {{ old('order_id') == $order->id ? 'selected' : '' }}>
-                            {{ $order->name }}
+                            {{ $order->id }}
                         </option>
                     @endforeach
                 </select>
