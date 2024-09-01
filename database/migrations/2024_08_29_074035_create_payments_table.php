@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('payment_method', ['Cash', 'Bank Transfer', 'Credit Card', 'E-Wallet']);
             $table->decimal('amount', 10, 2);
             $table->date('payment_date');
-            $table->enum('status', ['Pending', 'Completed', 'Failed']);
+            $table->decimal('refund',10,2)->default(0);
             $table->timestamps();
         });
     }

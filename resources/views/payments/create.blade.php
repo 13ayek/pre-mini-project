@@ -9,13 +9,13 @@
             @csrf
 
             <div class="mb-3">
-                <label for="order_id" class="form-label">Order:</label>
+                <label for="order_id" class="form-label">Customer</label>
                 <select name="order_id" class="form-control" id="order_id">
                     <option value="" disabled selected> - </option>
-                    @foreach ($orders as $order)
-                        <option value="{{ $order->id }}"
-                            {{ old('order_id') == $order->id ? 'selected' : '' }}>
-                            {{ $order->id }}
+                    @foreach ($customers as $customer)
+                        <option value="{{ $customer->id }}"
+                            {{ old('customer_id') == $customer->id ? 'selected' : '' }}>
+                            {{ $customer->name }}
                         </option>
                     @endforeach
                 </select>
@@ -34,7 +34,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="amount" class="form-label">amount</label>
+                <label for="amount" class="form-label">Money Paid Off</label>
                 <input type="number" name="amount" class="form-control" id="amount" value="{{ old('amount') }}">
             </div>
 
@@ -43,21 +43,8 @@
                 <input type="date" name="payment_date" class="form-control" id="payment_date" value="{{ old('payment_date') }}">
             </div>
 
-            <div>
-                <div class="mb-3">
-                    <label for="status" class="form-label">Status</label>
-                    <select name="status" class="form-control" id="status">
-                        <option value="" disabled selected> - </option>
-                        <option value="Pending" {{ old('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="In Progress" {{ old('status') == 'In Progress' ? 'selected' : '' }}>In Progress</option>
-                        <option value="Completed" {{ old('status') == 'Completed' ? 'selected' : '' }}>Completed</option>
-                        <option value="Cancelled" {{ old('status') == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
-                </select>
-            </div>
-
-
             <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="{{ route('customers.index') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('payments.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </main>
