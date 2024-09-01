@@ -28,7 +28,7 @@
                     @foreach ($service as $service)
                         <option value="{{ $service->id }}"
                             {{ old('service_id') == $service->id ? 'selected' : '' }}>
-                            {{ $service->name }}
+                            {{ $service->service_name }}
                         </option>
                     @endforeach
                 </select>

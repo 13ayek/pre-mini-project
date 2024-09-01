@@ -25,7 +25,7 @@
 
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                <input type="textarea" name="address" class="form-control" id="address" value="{{ old('address') }}">
+                <textarea  name="address" class="form-control" id="address" value="{{ old('address') }}"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
