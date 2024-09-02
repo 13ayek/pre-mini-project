@@ -11,9 +11,16 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::all();
+        $query = Customer::query();
+
+        if ($search = $request->input('search')) {
+        $query->where('name', 'like', '%'. $search .'%');
+        }
+
+        $customers = $query->simplePaginate(5);
+
         return view("customers.index", compact("customers"));
     }
 
@@ -109,7 +116,7 @@ class CustomerController extends Controller
             // Tangani pengecualian dan arahkan kembali dengan pesan error
             return redirect()->route('customers.index')
                              ->with('error', $e->getMessage());
-        }   
+        }
     }
 
 }
