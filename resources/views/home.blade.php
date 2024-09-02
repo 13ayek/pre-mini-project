@@ -40,7 +40,7 @@
                                     <div class="p-4 p-md-5">
                                         <div class="h2 fw-bolder">Welcome to CleanDream!</div>
                                         <p>Make your clothes clean like a dream...</p>
-                                        <a class="stretched-link text-decoration-none" href="#!">
+                                        <a class="stretched-link text-decoration-none" href="{{ route('customers.index') }}">
                                             Read more
                                             <i class="bi bi-arrow-right"></i>
                                         </a>
@@ -64,7 +64,7 @@
                                 <img class="card-img-top" src="foto/Rincian-Modal-Usaha-Laundry-dan-Estimasi-Profitnya.avif" alt="foto1" />
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">Clean</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><div class="h5 card-title mb-3">100% Clean</div></a>
+                                    <a class="text-decoration-none link-dark stretched-link"><div class="h5 card-title mb-3">100% Clean</div></a>
                                     <p class="card-text mb-0">make your clothes clean like new</p>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                 <img class="card-img-top" src="foto/modal-usaha-laundry-2023.jpeg" alt="foto2" />
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">Facilities</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><div class="h5 card-title mb-3">Advanced Facilities</div></a>
+                                    <a class="text-decoration-none link-dark stretched-link"><div class="h5 card-title mb-3">Advanced Facilities</div></a>
                                     <p class="card-text mb-0">equipped with complete state-of-the-art facilities</p>
                                 </div>
                             </div>
@@ -84,17 +84,11 @@
                                 <img class="card-img-top" src="foto/WhatsApp-Image-2023-07-16-at-2.03.40-PM-1.jpeg" alt="foto3" />
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">Employee</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><div class="h5 card-title mb-3">active employees</div></a>
+                                    <a class="text-decoration-none link-dark stretched-link"><div class="h5 card-title mb-3">active employees</div></a>
                                     <p class="card-text mb-0">Employees are active and work fast</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="text-end mb-5 mb-xl-0">
-                        <a class="text-decoration-none" href="#!">
-                            More stories
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
                     </div>
                 </div>
             </section>
@@ -103,13 +97,13 @@
         <footer class="bg-dark py-4 mt-auto">
             <div class="container px-5">
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Your Website 2023</div></div>
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; CleanDream</div></div>
                     <div class="col-auto">
-                        <a class="link-light small" href="#!">Privacy</a>
+                        <a class="link-light small" href="">Privacy</a>
                         <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Terms</a>
+                        <a class="link-light small" href="">Terms</a>
                         <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Contact</a>
+                        <a class="link-light small" href="">Contact</a>
                     </div>
                 </div>
             </div>
