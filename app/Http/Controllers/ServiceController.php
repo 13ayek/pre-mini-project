@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ServiceController extends Controller
 {
@@ -30,7 +31,7 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'service_name'=> ['required','string','max:255'],
+            'service_name'=> ['required','string','max:255','unique:services,service_name,except,id'],
             'description' => ['nullable','string','max:255'],
             'price'       => ['required','numeric','min:1'],
         ]);
@@ -61,7 +62,7 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $request->validate([
-            'service_name'=> ['required','string','max:255'],
+            'service_name'=> ['required','string','max:255',Rule::unique('service_name')->ignore($service)],
             'description' => ['nullable','string','max:255'],
             'price'       => ['required','numeric','min:1'],
         ]);
