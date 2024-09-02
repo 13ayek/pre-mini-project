@@ -23,6 +23,7 @@
             height: 100%;
             margin: 0;
             padding: 0;
+            overflow: hidden; /* Menghapus scrollbar dari body */
         }
 
         .d-flex {
@@ -30,42 +31,44 @@
         }
 
         #sidebar {
-            position: absolute;
+            position: fixed; /* Mengubah dari absolute menjadi fixed */
             top: 0;
             left: 0;
             width: 250px;
-            /* Set the width of the sidebar */
             height: 100%;
             z-index: 1050;
-            /* Ensure sidebar is above the navbar */
+            overflow-y: auto; /* Menambahkan scroll jika konten sidebar terlalu panjang */
+            background-color: #f8f9fa; /* Background untuk sidebar */
         }
 
         .navbar {
             z-index: 1000;
-            /* Lower z-index to place navbar behind the sidebar */
             background-color: #5a9bd3 !important;
-            /* Tambahkan !important */
             border-bottom: 1px solid #4a8ac4;
+            position: fixed; /* Navbar juga harus fixed */
+            top: 0;
+            width: calc(100% - 250px); /* Lebar navbar disesuaikan dengan lebar konten */
+            margin-left: 250px; /* Margin kiri sebesar lebar sidebar */
         }
 
         .navbar-nav .nav-link {
             color: white;
-            /* Ubah warna teks link navbar menjadi putih */
         }
 
         .navbar-nav .nav-link:hover {
             color: #dfefff;
-            /* Warna hover link di navbar */
         }
 
         .content {
-            overflow-y: auto;
-            margin-left: 250px;
-            /* Adjust margin to the width of the sidebar */
-            width: calc(100% - 250px);
-            /* Adjust width to fill the remaining space */
+            margin-top: 56px; /* Menambahkan margin top sebesar tinggi navbar */
+            margin-left: 250px; /* Margin kiri sebesar lebar sidebar */
+            height: calc(100vh - 56px); /* Tinggi konten menyesuaikan layar dikurangi navbar */
+            overflow-y: auto; /* Menambahkan scroll pada konten jika melebihi tinggi layar */
+            width: calc(100% - 250px); /* Lebar konten disesuaikan dengan lebar sidebar */
+            background-color: #e3f2fd; /* Contoh background untuk konten */
         }
     </style>
+
 </head>
 
 <body>
@@ -86,10 +89,10 @@
                     <a class="nav-link" href="{{ route('orders.index') }}">Orders</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('payments.index') }}">Payments</a>
+                    <a class="nav-link" href="{{ route('laundryItems.index') }}">Laundry Items</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('laundryItems.index') }}">Laundry Items</a>
+                    <a class="nav-link" href="{{ route('payments.index') }}">Payments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('employees.index') }}">Employees</a>
@@ -101,7 +104,7 @@
         </nav>
 
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="background-color: #5a9bd3;">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -160,44 +163,6 @@
                 </main>
             </div>
         </div>
-
-        <!-- Styles -->
-        <style>
-            html,
-            body {
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-
-            .d-flex {
-                height: 100vh;
-            }
-
-            #sidebar {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 250px;
-                /* Set the width of the sidebar */
-                height: 100%;
-                z-index: 1050;
-                /* Ensure sidebar is above the navbar */
-            }
-
-            .navbar {
-                z-index: 1000;
-                /* Lower z-index to place navbar behind the sidebar */
-            }
-
-            .content {
-                overflow-y: auto;
-                margin-left: 250px;
-                /* Adjust margin to the width of the sidebar */
-                width: calc(100% - 250px);
-                /* Adjust width to fill the remaining space */
-            }
-        </style>
     </div>
 </body>
 
