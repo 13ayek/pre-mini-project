@@ -10,13 +10,11 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label for="order_id" class="form-label">Order:</label>
-                <select name="order_id" class="form-control" id="order_id">
-                    <option value="" disabled> - </option>
+                <label for="customer" class="form-label">Customer</label>
+                <select name="order_id" id="customer" class="form-select" required>
                     @foreach ($orders as $order)
-                        <option value="{{ $order->id }}"
-                            {{ $laundryItem->order_id == $order->id ? 'selected' : '' }}>
-                            {{ $order->name }}
+                        <option value="{{ $order->id }}" {{ $order->id == $laundryItem->order_id ? 'selected' : '' }}>
+                            {{ $order->customer->name }} - Order #{{ $order->id }}
                         </option>
                     @endforeach
                 </select>
@@ -38,7 +36,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>
-            <a href="{{ route('laundyItems.index') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('laundryItems.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </main>

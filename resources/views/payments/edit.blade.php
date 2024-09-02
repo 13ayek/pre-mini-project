@@ -10,18 +10,15 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label for="order_id" class="form-label">Customer</label>
-                <select name="order_id" class="form-control" id="order_id">
-                    <option value="" disabled selected> - </option>
-                    @foreach ($customers as $customer)
-                        <option value="{{ $customer->id }}"
-                            {{ $payment->order_id == $customer->id ? 'selected' : '' }}>
-                            {{ $customer->name }}
+                <label for="customer" class="form-label">Customer</label>
+                <select name="order_id" id="customer" class="form-select" required>
+                    @foreach ($orders as $order)
+                        <option value="{{ $order->id }}" {{ $order->id == $payment->order_id ? 'selected' : '' }}>
+                            {{ $order->customer->name }} - Order #{{ $order->id }}
                         </option>
                     @endforeach
                 </select>
             </div>
-
             <div class="mb-3">
                 <label for="payment_method" class="form-label">Payment Method</label>
                 <select name="payment_method" class="form-control" id="payment_method">

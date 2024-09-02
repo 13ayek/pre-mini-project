@@ -8,15 +8,15 @@
         <form action="{{ route('payments.store') }}" method="POST">
             @csrf
 
-            <div class="mb-3">
-                <label for="order_id" class="form-label">Customer</label>
-                <select name="order_id" class="form-control" id="order_id">
-                    <option value="" disabled selected> - </option>
+            <<div class="mb-3">
+                <label for="customer" class="form-label">Customer</label>
+                <select name="order_id" id="customer" class="form-select" required>
+                    <option value="">Select Customer</option>
                     @foreach ($customers as $customer)
-                        <option value="{{ $customer->id }}"
-                            {{ old('customer_id') == $customer->id ? 'selected' : '' }}>
-                            {{ $customer->name }}
-                        </option>
+                        @foreach ($customer->orders as $order)
+                            <option value="{{ $order->id }}">{{ $customer->name }} - Order #{{ $order->id }}
+                            </option>
+                        @endforeach
                     @endforeach
                 </select>
             </div>

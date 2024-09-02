@@ -10,7 +10,7 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Order</th>
+                        <th>Customer</th>
                         <th>Item Name</th>
                         <th>Quantity</th>
                         <th>Weight</th>
@@ -21,10 +21,10 @@
                     @foreach ($laundryItems as $laundryItem)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $laundryItem->orders->order_id }}</td>
+                            <td>{{ $laundryItem->order->customer->name}}</td>
                             <td>{{ $laundryItem->item_name }}</td>
                             <td>{{ $laundryItem->quantity }}</td>
-                            <td>{{ $laundryItem->weight }}</td>
+                            <td>{{ $laundryItem->weight }} kg</td>
                             <td>
                                 <a href="{{ route('laundryItems.edit', $laundryItem->id) }}"
                                     class="btn btn-warning btn-sm">Edit</a>
