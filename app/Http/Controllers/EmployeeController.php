@@ -35,12 +35,17 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'position' => 'required|string|max:50',
-            'phone_number' => 'required|string|max:15|unique:employees,phone_number,except,id',
-            'email' => 'required|email|max:100|unique:employees,email,except,id',
+            'phone_number' => 'required|string|max:15|unique:employees,phone_number',
+            'email' => 'required|email|max:100|unique:employees,email',
+            'hire_date' => 'required|date',
         ]);
+
+        // Pastikan semua field yang diperlukan termasuk 'email' dimasukkan di sini
         Employee::create($request->all());
-        return redirect()->route('employees.index')->with('success','Employees Created Succesfully');
+
+        return redirect()->route('employees.index')->with('success', 'Employee Created Successfully');
     }
+
 
     /**
      * Display the specified resource.
@@ -66,11 +71,12 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'position' => 'required|string|max:50',
-            'phone_number' => ['required','string','max:15',Rule::unique('phone_number')->ignore($employee->id)],
-            'email' => ['required','email','max:100',Rule::unique('email')->ignore($employee->id)],
+            'phone_number' => ['required', 'string', 'max:15', Rule::unique('employees', 'phone_number')->ignore($employee->id)],
+            'email' => ['required', 'email', 'max:100', Rule::unique('employees', 'email')->ignore($employee->id)],
+            'hire_date' => 'required|date',
         ]);
         $employee->update($request->all());
-        return redirect()->route('employees.index')->with('success','Employee Updated Successfully');
+        return redirect()->route('employees.index')->with('success', 'Employee Updated Successfully');
     }
 
     /**
@@ -79,6 +85,6 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         $employee->delete();
-        return redirect()->route('employees.index')->with('success','Employee Deleted Succesfully');
+        return redirect()->route('employees.index')->with('success', 'Employee Deleted Succesfully');
     }
 }

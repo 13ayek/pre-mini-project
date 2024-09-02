@@ -11,6 +11,7 @@
                     <tr>
                         <th>No.</th>
                         <th>Name</th>
+                        <th>Email</th>
                         <th>Phone</th>
                         <th>Position</th>
                         <th>Hire Date</th>
@@ -22,6 +23,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $employee->name }}</td>
+                            <td>{{ $employee->email }}</td>
                             <td>{{ $employee->phone_number }}</td>
                             <td>{{ $employee->position }}</td>
                             <td>{{ $employee->hire_date }}</td>

@@ -14,6 +14,11 @@
             </div>
 
             <div class="mb-3">
+                <label for="email" class="form-label">Email :</label>
+                <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}">
+            </div>
+
+            <div class="mb-3">
                 <label for="phone_number" class="form-label">Phone Number :</label>
                 <input type="number" name="phone_number" class="form-control" id="phone_number" value="{{ old('phone_number') }}">
             </div>
@@ -25,7 +30,7 @@
 
             <div class="mb-3">
                 <label for="hire_date" class="form-label">Hire Date :</label>
-                <input type="text" name="hire_date" class="form-control" id="hire_date" value="{{ old('hire_date') }}">
+                <input type="date" name="hire_date" class="form-control" id="hire_date" value="{{ old('hire_date') }}">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
