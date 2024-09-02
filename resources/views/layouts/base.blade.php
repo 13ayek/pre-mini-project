@@ -23,7 +23,8 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Menghapus scrollbar dari body */
+            overflow: hidden;
+            /* Menghapus scrollbar dari body */
         }
 
         .d-flex {
@@ -31,24 +32,30 @@
         }
 
         #sidebar {
-            position: fixed; /* Mengubah dari absolute menjadi fixed */
+            position: fixed;
+            /* Mengubah dari absolute menjadi fixed */
             top: 0;
             left: 0;
             width: 250px;
             height: 100%;
             z-index: 1050;
-            overflow-y: auto; /* Menambahkan scroll jika konten sidebar terlalu panjang */
-            background-color: #f8f9fa; /* Background untuk sidebar */
+            overflow-y: auto;
+            /* Menambahkan scroll jika konten sidebar terlalu panjang */
+            background-color: #f8f9fa;
+            /* Background untuk sidebar */
         }
 
         .navbar {
             z-index: 1000;
             background-color: #5a9bd3 !important;
             border-bottom: 1px solid #4a8ac4;
-            position: fixed; /* Navbar juga harus fixed */
+            position: fixed;
+            /* Navbar juga harus fixed */
             top: 0;
-            width: calc(100% - 250px); /* Lebar navbar disesuaikan dengan lebar konten */
-            margin-left: 250px; /* Margin kiri sebesar lebar sidebar */
+            width: calc(100% - 250px);
+            /* Lebar navbar disesuaikan dengan lebar konten */
+            margin-left: 250px;
+            /* Margin kiri sebesar lebar sidebar */
         }
 
         .navbar-nav .nav-link {
@@ -60,12 +67,18 @@
         }
 
         .content {
-            margin-top: 56px; /* Menambahkan margin top sebesar tinggi navbar */
-            margin-left: 250px; /* Margin kiri sebesar lebar sidebar */
-            height: calc(100vh - 56px); /* Tinggi konten menyesuaikan layar dikurangi navbar */
-            overflow-y: auto; /* Menambahkan scroll pada konten jika melebihi tinggi layar */
-            width: calc(100% - 250px); /* Lebar konten disesuaikan dengan lebar sidebar */
-            background-color: #e3f2fd; /* Contoh background untuk konten */
+            margin-top: 56px;
+            /* Menambahkan margin top sebesar tinggi navbar */
+            margin-left: 250px;
+            /* Margin kiri sebesar lebar sidebar */
+            height: calc(100vh - 56px);
+            /* Tinggi konten menyesuaikan layar dikurangi navbar */
+            overflow-y: auto;
+            /* Menambahkan scroll pada konten jika melebihi tinggi layar */
+            width: calc(100% - 250px);
+            /* Lebar konten disesuaikan dengan lebar sidebar */
+            background-color: #e3f2fd;
+            /* Contoh background untuk konten */
         }
     </style>
 
@@ -156,9 +169,20 @@
 
         <!-- Content -->
         <div class="d-flex">
-            <!-- Page Content -->
             <div class="content flex-grow-1">
-                <main class="py-4">
+                <div class="mt-4">
+                    @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+                </div>
+                <main class="container">
                     @yield('content')
                 </main>
             </div>

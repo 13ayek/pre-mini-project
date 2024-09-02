@@ -14,7 +14,7 @@
                 <select name="order_id" id="customer" class="form-select" required>
                     @foreach ($orders as $order)
                         <option value="{{ $order->id }}" {{ $order->id == $laundryItem->order_id ? 'selected' : '' }}>
-                            {{ $order->customer->name }} - Order #{{ $order->id }}
+                            {{ $order->customer->name }} - {{ $order->customer->email }}
                         </option>
                     @endforeach
                 </select>

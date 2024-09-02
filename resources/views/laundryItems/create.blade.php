@@ -14,7 +14,7 @@
                         <option value="">Select Customer</option>
                         @foreach ($customers as $customer)
                             @foreach ($customer->orders as $order)
-                                <option value="{{ $order->id }}">{{ $customer->name }} - Order #{{ $order->id }}
+                                <option value="{{ $order->id }}">{{ $customer->name }} - {{ $order->customer->email }}
                                 </option>
                             @endforeach
                         @endforeach
