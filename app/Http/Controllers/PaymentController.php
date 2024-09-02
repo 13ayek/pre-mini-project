@@ -23,8 +23,9 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        $orders = Order::with('customers')->get();
-        return view('payments.create', compact('orders'));
+        $orders = Order::with('customer')->get();
+        $customers = Customer::all();
+        return view('payments.create', compact('orders','customers'));
     }
 
     /**
@@ -65,7 +66,8 @@ class PaymentController extends Controller
     public function edit(Payment $payment)
     {
         $orders = Order::with('customer')->get();
-        return view('payments.edit', compact('payment', 'orders'));
+        $customers = Customer::all();
+        return view('payments.edit', compact('payment', 'orders','customers'));
     }
 
     /**
