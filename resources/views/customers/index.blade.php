@@ -4,6 +4,9 @@
         <div class="container mt-5">
             <h1>Customer</h1><br>
             <div class="container">
+                <form action="{{ route('customers.index') }}" method="GET">
+                    <input type="text" name="search" value="{{ request('search') }}">
+                </form>
                 <a href="{{ route('customers.create') }}" type="button" class="btn btn-outline-info mb-3">Add</a>
             </div>
             <table class="table table-bordered">
@@ -39,6 +42,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="pagination">
+                {{ $customers->links() }}
+            </div>
         </div>
     </main>
 @endsection
