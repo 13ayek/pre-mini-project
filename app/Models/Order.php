@@ -30,9 +30,4 @@ class Order extends Model
     {
         return $this->hasMany(LaundryItem::class);
     }
-
-    public function employeeAssignments()
-    {
-        return $this->hasMany(EmployeeAssignment::class);
-    }
 }

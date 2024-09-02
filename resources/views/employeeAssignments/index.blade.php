@@ -11,8 +11,8 @@
                     <tr>
                         <th>No.</th>
                         <th>Employee Assignments</th>
-                        <th>Order</th>
-                        <th>Date</th>
+                        <th>Service</th>
+                        <th>Schedule</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -20,9 +20,9 @@
                     @foreach ($employeeAssignments as $employeeAssignment)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $employeeAssignment->employees->employee_id }}</td>
-                            <td>{{ $employeeAssignment->orders->order_id }}</td>
-                            <td>{{ $employeeAssignment->assigned_date }}</td>
+                            <td>{{ $employeeAssignment->employee->name }}</td>
+                            <td>{{ $employeeAssignment->service->service_name }}</td>
+                            <td>{{ $employeeAssignment->schedules->day->id }}</td>
                             <td>
                                 <a href="{{ route('employeeAssignments.edit', $employeeAssignment->id) }}"
                                     class="btn btn-warning btn-sm">Edit</a>

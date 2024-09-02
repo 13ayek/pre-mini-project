@@ -15,6 +15,11 @@
             </div>
 
             <div class="mb-3">
+                <label for="email" class="form-label">Email :</label>
+                <input type="email" name="email" class="form-control" id="name" value="{{ $employee->email }}">
+            </div>
+
+            <div class="mb-3">
                 <label for="phone_number" class="form-label">Phone Number :</label>
                 <input type="number" name="phone_number" class="form-control" id="phone_number" value="{{ $employee->phone_number }}">
             </div>

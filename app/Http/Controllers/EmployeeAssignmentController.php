@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Schedule;
+use App\Models\Day;
 use App\Models\EmployeeAssignment;
-use App\Models\Order;
+use App\Models\Service; // Pastikan nama model sesuai dengan tabel
 use Illuminate\Http\Request;
 
 class EmployeeAssignmentController extends Controller
@@ -14,8 +16,10 @@ class EmployeeAssignmentController extends Controller
      */
     public function index()
     {
-        $employeeAssignments = EmployeeAssignment::with('employee','orders')->get();
-        return view('employeeAssignments.index', compact('employeeAssignments'));
+        $employeeAssignments = EmployeeAssignment::with('employee', 'service')->get();
+        $schedule = Schedule::all();
+        $days = Day::all();
+        return view('employeeAssignments.index', compact('employeeAssignments', 'schedule', 'days'));
     }
 
     /**
@@ -24,8 +28,10 @@ class EmployeeAssignmentController extends Controller
     public function create()
     {
         $employees = Employee::all();
-        $orders = Order::all();
-        return view('employeeAssignments.create', compact('employees','orders'));
+        $services = Service::all(); // Pastikan nama model sesuai
+        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+        return view('employeeAssignments.create', compact('employees', 'services', 'days'));
     }
 
     /**
@@ -33,13 +39,37 @@ class EmployeeAssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'employee_id' => 'required|exists:employees,id',
-            'order_id' => 'required|exists:orders,id',
-            'assigned_date' => 'required|date',
+            'service_id' => 'required|exists:services,id',
         ]);
-        EmployeeAssignment::create($request->all());
-        return redirect()->route('employeeAssignment.index')->with('success','Employee Assignment Created Succesfully');
+
+        $employeeAssignment = EmployeeAssignment::create([
+            'employee_id' => $validated['employee_id'],
+            'service_id' => $validated['service_id'],
+        ]);
+
+        $rules = [
+            'days.*' => 'required',
+        ];
+
+        $masseges = [
+            'days.*.required' => 'days must be filled'
+        ];
+        $request->validate($rules, $masseges);
+
+        $employee_assignment_id = $employeeAssignment->id;
+        $days = $request->input('days',[]);
+
+        foreach($days as $value) {
+            $schedule = Schedule::create([
+                'employee_assignments_id' => $employee_assignment_id,
+                'days_id' => $value,
+            ]);
+        }
+
+
+        return redirect()->route('employeeAssignments.index')->with('success', 'Employee Assignment Created Successfully');
     }
 
     /**
@@ -47,7 +77,7 @@ class EmployeeAssignmentController extends Controller
      */
     public function show(EmployeeAssignment $employeeAssignment)
     {
-        //
+        return view('employeeAssignments.show', compact('employeeAssignment'));
     }
 
     /**
@@ -56,8 +86,10 @@ class EmployeeAssignmentController extends Controller
     public function edit(EmployeeAssignment $employeeAssignment)
     {
         $employees = Employee::all();
-        $orders = Order::all();
-        return view('employeeAssignments', compact('employeeAssignment','orders','employees'));
+        $services = Service::all(); // Pastikan nama model sesuai
+        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+        return view('employeeAssignments.edit', compact('employeeAssignment', 'employees', 'services', 'days'));
     }
 
     /**
@@ -65,13 +97,20 @@ class EmployeeAssignmentController extends Controller
      */
     public function update(Request $request, EmployeeAssignment $employeeAssignment)
     {
-        $request->validate([
+        $validated = $request->validate([
             'employee_id' => 'required|exists:employees,id',
-            'order_id' => 'required|exists:orders,id',
-            'assigned_date' => 'required|date',
+            'service_id' => 'required|exists:services,id',
+            'schedule' => 'required|array',
+            'schedule.*' => 'string|in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
         ]);
-        $employeeAssignment->update($request->all());
-        return redirect()->route('employeeAssignments.index')->with('success','Employee Assignment Updated Succesfully');
+
+        $employeeAssignment->update([
+            'employee_id' => $validated['employee_id'],
+            'service_id' => $validated['service_id'],
+            'schedule' => $validated['schedule'],
+        ]);
+
+        return redirect()->route('employeeAssignments.index')->with('success', 'Employee Assignment Updated Successfully');
     }
 
     /**
@@ -80,6 +119,6 @@ class EmployeeAssignmentController extends Controller
     public function destroy(EmployeeAssignment $employeeAssignment)
     {
         $employeeAssignment->delete();
-        return redirect()->route('employeeAssignments.')->with('success','Employee Assignment Deleted Succesfully');
+        return redirect()->route('employeeAssignments.index')->with('success', 'Employee Assignment Deleted Successfully');
     }
 }

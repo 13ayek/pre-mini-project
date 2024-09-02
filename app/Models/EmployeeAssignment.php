@@ -2,21 +2,32 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class EmployeeAssignment extends Model
 {
-    use HasFactory;
-    protected $fillable = ['employee_id', 'order_id', 'assigned_date'];
+    protected $fillable = [
+        'employee_id',
+        'service_id',
+        'schedule',
+    ];
+
+    protected $casts = [
+        'schedule' => 'array',
+    ];
 
     public function employee()
     {
         return $this->belongsTo(Employee::class);
     }
 
-    public function order()
+    public function service()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Service::class);
+    }
+
+    public function schedule()
+    {
+        return $this->hasMany(Schedule::class);
     }
 }
