@@ -23,8 +23,8 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        $customers = Customer::whereHas('orders')->get();
-        return view('payments.create', compact('customers'));
+        $orders = Order::with('customers')->get();
+        return view('payments.create', compact('orders'));
     }
 
     /**
@@ -64,8 +64,8 @@ class PaymentController extends Controller
      */
     public function edit(Payment $payment)
     {
-        $customers = Customer::whereHas('orders')->get();
-        return view('payments.edit', compact('payment', 'customers'));
+        $orders = Order::with('customer')->get();
+        return view('payments.edit', compact('payment', 'orders'));
     }
 
     /**
@@ -80,13 +80,13 @@ class PaymentController extends Controller
             'payment_date' => 'required|date',
         ]);
 
-        $order = Order::find($request->order_id);
+        $orders = Order::find($request->order_id);
 
         $payment->update([
             'order_id' => $request->order_id,
             'payment_method' => $request->payment_method,
             'amount' => $request->amount,
-            'refund' => $request->amount - $order->total_price,
+            'refund' => $request->amount - $orders->total_price,
             'payment_date' => $request->payment_date,
         ]);
         return redirect()->route('payments.index')->with('success', 'Payment Created Successfully');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\LaundryItem;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class LaundryItemController extends Controller
      */
     public function index()
     {
-        $laundryItems = LaundryItem::with('orders')->get();
+        $laundryItems = LaundryItem::with('order.customer')->get();
         return view('laundryItems.index', compact('laundryItems'));
     }
 
@@ -22,8 +23,8 @@ class LaundryItemController extends Controller
      */
     public function create()
     {
-        $orders = Order::all();
-        return view('laundryItems.create', compact('orders'));
+        $customers = Customer::whereHas('orders')->get();
+        return view('laundryItems.create', compact('customers'));
     }
 
     /**
@@ -37,8 +38,15 @@ class LaundryItemController extends Controller
             'quantity' => 'required|integer|min:1',
             'weight' => 'required|numeric|min:0',
         ]);
-        LaundryItem::create($request->all());
-        return redirect()->route('laundryItems.index')->with('success','Laundry Item Created Successfully');
+        $orders = Order::find($request->order_id);
+
+        LaundryItem::create([
+            'order_id' => $request->order_id,
+            'item_name' => $request->item_name,
+            'quantity' => $request->quantity,
+            'weight' => $request->weight,
+        ]);
+        return redirect()->route('laundryItems.index')->with('success', 'Laundry item Created successfully.');
     }
 
     /**
@@ -54,8 +62,8 @@ class LaundryItemController extends Controller
      */
     public function edit(LaundryItem $laundryItem)
     {
-        $orders = Order::all();
-        return view('laundryItems.edit', compact('laundryItem','orders'));
+        $orders = Order::with('customer')->get();
+        return view('laundryItems.edit', compact('laundryItem', 'orders'));
     }
 
     /**
@@ -69,9 +77,15 @@ class LaundryItemController extends Controller
             'quantity' => 'required|integer|min:1',
             'weight' => 'required|numeric|min:0',
         ]);
+        $orders = Order::find($request->order_id);
 
-        $laundryItem->update($request->all());
-        return redirect()->route('laundry_items.index')->with('success', 'Laundry item updated successfully.');
+        $laundryItem->update([
+            'order_id' => $request->order_id,
+            'item_name' => $request->item_name,
+            'quantity' => $request->quantity,
+            'weight' => $request->weight,
+        ]);
+        return redirect()->route('laundryItems.index')->with('success', 'Laundry item Updated successfully.');
     }
 
     /**
@@ -80,6 +94,6 @@ class LaundryItemController extends Controller
     public function destroy(LaundryItem $laundryItem)
     {
         $laundryItem->delete();
-        return redirect()->route('laundryItems.index')->with('success','Laundry Item Deleted Succesfully');
+        return redirect()->route('laundryItems.index')->with('success', 'Laundry Item Deleted Succesfully');
     }
 }
