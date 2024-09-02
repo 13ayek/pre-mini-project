@@ -8,9 +8,9 @@
         <form action="{{ route('payments.store') }}" method="POST">
             @csrf
 
-            <<div class="mb-3">
+            <div class="mb-3">
                 <label for="customer" class="form-label">Customer</label>
-                <select name="order_id" id="customer" class="form-select" required>
+                <select name="order_id" id="customer" class="form-select" >
                     <option value="">Select Customer</option>
                     @foreach ($customers as $customer)
                         @foreach ($customer->orders as $order)
@@ -25,7 +25,7 @@
                 <div class="mb-3">
                     <label for="payment_method" class="form-label">payment_method</label>
                     <select name="payment_method" class="form-control" id="payment_method">
-                        <option value="" disabled selected> - </option>
+                        <option value="" disabled selected>Select payment method</option>
                         <option value="Cash" {{ old('payment_method') == 'Cash' ? 'selected' : '' }}>Cash</option>
                         <option value="Bank Transfer" {{ old('payment_method') == 'Bank Transfer' ? 'selected' : '' }}>Bank Transfer</option>
                         <option value="Credit Card" {{ old('payment_method') == 'Credit Card' ? 'selected' : '' }}>Credit Card</option>

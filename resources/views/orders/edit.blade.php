@@ -12,7 +12,6 @@
             <div class="mb-3">
                 <label for="customer_id" class="form-label">Customer:</label>
                 <select name="customer_id" class="form-control" id="customer_id">
-                    <option value="" disabled> - </option>
                     @foreach ($customers as $customer)
                         <option value="{{ $customer->id }}"
                             {{ $order->customer_id == $customer->id ? 'selected' : '' }}>
@@ -25,11 +24,10 @@
             <div class="mb-3">
                 <label for="service_id" class="form-label">Service:</label>
                 <select name="service_id" class="form-control" id="service_id">
-                    <option value="" disabled> - </option>
                     @foreach ($services as $service)
                         <option value="{{ $service->id }}"
                             {{ $order->service_id == $service->id ? 'selected' : '' }}>
-                            {{ $service->name }}
+                            {{ $service->service_name }}
                         </option>
                     @endforeach
                 </select>

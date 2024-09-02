@@ -36,7 +36,7 @@ class OrderController extends Controller
         $request->validate([
             'customer_id' => 'required|exists:customers,id',
             'service_id' => 'required|exists:services,id',
-            'order_date' => 'required|date',
+            'order_date' => 'required|date|after_or_equal:today',
             'status' => 'required|in:Pending,In Progress,Completed,Cancelled',
             'total_price' => 'required|numeric|min:1',
         ]);
@@ -72,7 +72,7 @@ class OrderController extends Controller
         $request->validate([
             'customer_id' => 'required|exists:customers,id',
             'service_id' => 'required|exists:services,id',
-            'order_date' => 'required|date',
+            'order_date' => 'required|date|after_or_equal:today',
             'status' => 'required|in:Pending,In Progress,Completed,Cancelled',
             'total_price' => 'required|numeric|min:1',
         ]);
