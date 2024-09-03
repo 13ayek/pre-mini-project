@@ -22,7 +22,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $service->service_name }}</td>
-                            <td>{{ $service->description }}</td>
+                            <td>{{ $service->descriptiongit }}</td>
                             <td>Rp. {{ number_format($service->price, 2, ',', '.')}}</td>
                             <td>
                                 <a href="{{ route('services.edit', $service->id) }}"
