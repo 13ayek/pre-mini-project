@@ -84,10 +84,10 @@ class EmployeeAssignmentController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(EmployeeAssignment $employeeAssignment)
-    {
-        $employees = Employee::all();
-        $services = Service::all(); // Pastikan nama model sesuai
-        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+{
+    $employees = Employee::all();
+    $services = Service::all();
+    $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
         return view('employeeAssignments.edit', compact('employeeAssignment', 'employees', 'services', 'days'));
     }
@@ -100,15 +100,22 @@ class EmployeeAssignmentController extends Controller
         $validated = $request->validate([
             'employee_id' => 'required|exists:employees,id',
             'service_id' => 'required|exists:services,id',
-            'schedule' => 'required|array',
-            'schedule.*' => 'string|in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
+            'days' => 'required|array',
         ]);
 
-        $employeeAssignment->update([
-            'employee_id' => $validated['employee_id'],
-            'service_id' => $validated['service_id'],
-            'schedule' => $validated['schedule'],
-        ]);
+        // Hapus semua assignment hari yang sudah ada untuk employee dan service ini
+        EmployeeAssignment::where('employee_id', $employeeAssignment->employee_id)
+            ->where('service_id', $employeeAssignment->service_id)
+            ->delete();
+
+        // Tambahkan assignment baru berdasarkan input yang divalidasi
+        foreach ($validated['days'] as $day) {
+            EmployeeAssignment::create([
+                'employee_id' => $validated['employee_id'],
+                'service_id' => $validated['service_id'],
+                'day' => $day,
+            ]);
+        }
 
         return redirect()->route('employeeAssignments.index')->with('success', 'Employee Assignment Updated Successfully');
     }
