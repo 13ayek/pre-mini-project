@@ -11,9 +11,18 @@ class ServiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::all();
+
+        $query = Service::query();
+
+        if ($search = $request->input('search')) {
+            $query->where('service_name', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%')
+                ->orWhereRaw('CAST(price as CHAR)LIKE?', ['%' . $search . '%']);
+        }
+
+        $services = $query->simplePaginate(5);
         return view("services.index", compact("services"));
     }
 
@@ -31,13 +40,13 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'service_name'=> ['required','string','max:255','unique:services,service_name,except,id'],
-            'description' => ['nullable','string','max:255'],
-            'price'       => ['required','numeric','min:1'],
+            'service_name' => ['required', 'string', 'max:255', 'unique:services,service_name,except,id'],
+            'description' => ['nullable', 'string', 'max:255'],
+            'price'       => ['required', 'numeric', 'min:1'],
         ]);
         Service::create($request->all());
 
-        return redirect()->route('services.index')->with('success','Service Created Successfully');
+        return redirect()->route('services.index')->with('success', 'Service Created Successfully');
     }
 
     /**
@@ -62,13 +71,13 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $request->validate([
-            'service_name'=> ['required','string','max:255',Rule::unique('service_name')->ignore($service)],
-            'description' => ['nullable','string','max:255'],
-            'price'       => ['required','numeric','min:1'],
+            'service_name' => ['required', 'string', 'max:255', Rule::unique('service_name')->ignore($service)],
+            'description' => ['nullable', 'string', 'max:255'],
+            'price'       => ['required', 'numeric', 'min:1'],
         ]);
         $service->update($request->all());
 
-        return redirect()->route('services.index')->with('success','Service Updated Successfully');
+        return redirect()->route('services.index')->with('success', 'Service Updated Successfully');
     }
 
     /**
@@ -79,12 +88,11 @@ class ServiceController extends Controller
         if ($service->orders()->count() > 0) {
             // Jika masih ada orders, berikan pesan error
             return redirect()->route('services.index')
-                             ->with('error', 'Services cannot be deleted because they still have orders');
+                ->with('error', 'Services cannot be deleted because they still have orders');
         }
 
         $service->delete();
 
-        return redirect()->route('services.index')->with('success','Sevice Deleted Successfully');
+        return redirect()->route('services.index')->with('success', 'Sevice Deleted Successfully');
     }
-
 }

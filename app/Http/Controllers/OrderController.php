@@ -12,10 +12,29 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with('customer','service')->get();
-        return view('orders.index', compact('orders'));
+        // Mulai query pada model Order
+        $query = Order::query()->with(['customer', 'service']);
+
+        // Cek apakah ada input pencarian
+        if ($search = $request->input('search')) {
+            $query->whereHas('customer', function($q) use ($search) {
+                // Pencarian berdasarkan nama, email, atau alamat customer
+                $q->where('name', 'like', '%'. $search .'%');
+            })->orWhereHas('service', function($q) use ($search) {
+                // Pencarian berdasarkan nama service
+                $q->where('service_name', 'like', '%'. $search .'%');
+            })->orWhere('order_date','like','%'. $search .'%')
+              ->orWhere('status','like','%'. $search .'%')
+              ->orWhereRaw('CAST(total_price as CHAR)like?',['%'. $search .'%']);
+        }
+
+        // Gunakan pagination untuk hasil query
+        $orders = $query->simplePaginate(5);
+
+        // Kembalikan view dengan data orders
+        return view("orders.index", compact("orders"));
     }
 
     /**
@@ -25,7 +44,7 @@ class OrderController extends Controller
     {
         $customer = Customer::all();
         $service = Service::all();
-        return view('orders.create', compact('customer','service'));
+        return view('orders.create', compact('customer', 'service'));
     }
 
     /**
@@ -61,7 +80,7 @@ class OrderController extends Controller
     {
         $customers = Customer::all();
         $services = Service::all();
-        return view('orders.edit', compact('order','customers','services'));
+        return view('orders.edit', compact('order', 'customers', 'services'));
     }
 
     /**
@@ -78,7 +97,7 @@ class OrderController extends Controller
         ]);
         // dd($request->all());
         $order->update($request->all());
-        return redirect()->route('orders.index')->with('success','Order Updated Succesfully');
+        return redirect()->route('orders.index')->with('success', 'Order Updated Succesfully');
     }
 
     /**
@@ -87,6 +106,6 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
-        return redirect()->route('orders.index')->with('success','Order Deleted Succesfully');
+        return redirect()->route('orders.index')->with('success', 'Order Deleted Succesfully');
     }
 }

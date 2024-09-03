@@ -12,9 +12,18 @@ class PaymentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $payments = Payment::with('order.customer', 'order')->get();
+        $query = Payment::query()->with(['order.customer','order']);
+        if ($search = $request->input('search')) {
+            $query->whereHas('order.customer',function ($query) use ($search) {
+                $query->where('name','like','%'. $search .'%');
+            })->orWhere('order',function ($query) use ($search) {
+                $query->where('status','like','%'. $search .'%')
+                      ->orWhereRaw('CAST(total as CHAR) like?', ['%'. $search .'%']);
+            })->orWhere('payment_method','like','%'. $search .'%');
+        }
+        $payments = $query->simplePaginate(5);
         return view('payments.index', compact('payments'));
     }
 
@@ -25,7 +34,7 @@ class PaymentController extends Controller
     {
         $orders = Order::with('customer')->get();
         $customers = Customer::all();
-        return view('payments.create', compact('orders','customers'));
+        return view('payments.create', compact('orders', 'customers'));
     }
 
     /**
@@ -37,7 +46,7 @@ class PaymentController extends Controller
             'order_id' => 'required|exists:orders,id',
             'payment_method' => 'required|in:Cash,Bank Transfer,Credit Card,E-Wallet',
             'amount' => 'required|numeric|min:1',
-            'payment_date' => 'required|date',
+            'payment_date' => 'required|date|after_or_equal:today',
         ]);
 
         $order = Order::find($request->order_id);
@@ -67,7 +76,7 @@ class PaymentController extends Controller
     {
         $orders = Order::with('customer')->get();
         $customers = Customer::all();
-        return view('payments.edit', compact('payment', 'orders','customers'));
+        return view('payments.edit', compact('payment', 'orders', 'customers'));
     }
 
     /**
@@ -79,7 +88,7 @@ class PaymentController extends Controller
             'order_id' => 'required|exists:orders,id',
             'payment_method' => 'required|in:Cash,Bank Transfer,Credit Card,E-Wallet',
             'amount' => 'required|numeric|min:1',
-            'payment_date' => 'required|date',
+            'payment_date' => 'required|date|after_or_equal:today',
         ]);
 
         $orders = Order::find($request->order_id);
