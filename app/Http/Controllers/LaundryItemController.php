@@ -12,9 +12,18 @@ class LaundryItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $laundryItems = LaundryItem::with('order.customer')->get();
+        $query = LaundryItem::query()->with(['order.customer']);
+
+        if ($search = $request->input('search')) {
+            $query->whereHas('order.customer',function ($query) use ($search) {
+                $query->where('name','like','%'. $search .'%');
+        })->orWhere('item_name','like','%'. $search .'%')
+          ->orWhereRaw('CAST (quantity as CHAR) like?',['%'. $search .'%']);
+        }
+
+        $laundryItems = $query->simplePaginate(5);
         return view('laundryItems.index', compact('laundryItems'));
     }
 

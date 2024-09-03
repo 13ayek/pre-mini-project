@@ -16,7 +16,9 @@ class CustomerController extends Controller
         $query = Customer::query();
 
         if ($search = $request->input('search')) {
-        $query->where('name', 'like', '%'. $search .'%');
+        $query->where('name', 'like', '%'. $search .'%')
+              ->orWhere('email','like', '%'. $search .'%')
+              ->orWhere('address', 'like', '%'. $search .'%');
         }
 
         $customers = $query->simplePaginate(5);
