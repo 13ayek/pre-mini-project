@@ -81,48 +81,21 @@ class EmployeeAssignmentController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(EmployeeAssignment $employeeAssignment)
-{
-    $employees = Employee::all();
-    $services = Service::all();
-    $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    {
+        $employees = Employee::all();
+        $services = Service::all();
+        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-    // Mengambil hari-hari yang sudah dipilih untuk karyawan dan layanan ini
-    $selectedDays = EmployeeAssignment::where('employee_id', $employeeAssignment->employee_id)
-                    ->where('service_id', $employeeAssignment->service_id)
-                    ->pluck('day')
-                    ->toArray();
-
-    return view('employeeAssignments.edit', compact('employeeAssignment', 'employees', 'services', 'days', 'selectedDays'));
-}
-
+        return view('employeeAssignments.edit', compact('employeeAssignment', 'employees', 'services', 'days'));
+    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, EmployeeAssignment $employeeAssignment)
-    {
-        $validated = $request->validate([
-            'employee_id' => 'required|exists:employees,id',
-            'service_id' => 'required|exists:services,id',
-            'days' => 'required|array',
-        ]);
+    public function update(Request $request) {
 
-        // Hapus semua assignment hari yang sudah ada untuk employee dan service ini
-        EmployeeAssignment::where('employee_id', $employeeAssignment->employee_id)
-            ->where('service_id', $employeeAssignment->service_id)
-            ->delete();
-
-        // Tambahkan assignment baru berdasarkan input yang divalidasi
-        foreach ($validated['days'] as $day) {
-            EmployeeAssignment::create([
-                'employee_id' => $validated['employee_id'],
-                'service_id' => $validated['service_id'],
-                'day' => $day,
-            ]);
-        }
-
-        return redirect()->route('employeeAssignments.index')->with('success', 'Employee Assignment Updated Successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
