@@ -81,19 +81,20 @@ class EmployeeAssignmentController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(EmployeeAssignment $employeeAssignment)
-    {
-        $employees = Employee::all();
-        $services = Service::all();
-        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+{
+    $employees = Employee::all();
+    $services = Service::all();
+    $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-        // Mengambil hari-hari yang sudah dipilih untuk karyawan dan layanan ini
-        $selectedDays = EmployeeAssignment::where('employee_id', $employeeAssignment->employee_id)
-            ->where('service_id', $employeeAssignment->service_id)
-            ->pluck('day')
-            ->toArray();
+    // Mengambil hari-hari yang sudah dipilih untuk karyawan dan layanan ini
+    $selectedDays = EmployeeAssignment::where('employee_id', $employeeAssignment->employee_id)
+                    ->where('service_id', $employeeAssignment->service_id)
+                    ->pluck('day')
+                    ->toArray();
 
-        return view('employeeAssignments.edit', compact('employeeAssignment', 'employees', 'services', 'days', 'selectedDays'));
-    }
+    return view('employeeAssignments.edit', compact('employeeAssignment', 'employees', 'services', 'days', 'selectedDays'));
+}
+
 
     /**
      * Update the specified resource in storage.
