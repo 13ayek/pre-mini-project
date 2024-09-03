@@ -15,8 +15,8 @@ class Service extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function employeeAssignments()
+    public function employee()
     {
-        return $this->hasMany(EmployeeAssignment::class);
+        return $this->hasMany(Employee::class);
     }
 }

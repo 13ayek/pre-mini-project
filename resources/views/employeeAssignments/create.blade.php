@@ -25,8 +25,7 @@
                     <select name="service_id" class="form-control" id="service_id">
                         <option value="" disabled selected> - </option>
                         @foreach ($services as $service)
-                            <option value="{{ $service->id }}"
-                                {{ old('service_id') == $service->id ? 'selected' : '' }}>
+                            <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? 'selected' : '' }}>
                                 {{ $service->service_name }}
                             </option>
                         @endforeach
@@ -35,13 +34,13 @@
 
                 <div class="mb-3">
                     <label for="schedule" class="form-label">Schedule:</label>
-                @foreach ($days as $day)
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="days[]" value="{{ $loop->iteration }}"
-                            {{ in_array($day, old('schedule', $employeeAssignment->schedule ?? [])) ? 'checked' : '' }}>
-                        <label class="form-check-label">{{ $day }}</label>
-                    </div>
-                @endforeach
+                    @foreach ($days as $day)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="days[]" value="{{ $day }}"
+                                {{ in_array($day, old('days', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label">{{ $day }}</label>
+                        </div>
+                    @endforeach
                 </div>
 
 
