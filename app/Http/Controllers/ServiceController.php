@@ -71,7 +71,7 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $request->validate([
-            'service_name' => ['required', 'string', 'max:255', Rule::unique('service_name')->ignore($service)],
+            'service_name' => ['required', 'string', 'max:255', Rule::unique('services')->ignore($service)],
             'description' => ['nullable', 'string', 'max:255'],
             'price'       => ['required', 'numeric', 'min:1'],
         ]);
