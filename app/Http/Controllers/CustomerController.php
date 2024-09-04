@@ -103,22 +103,14 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        try {
-            // Cek apakah customer memiliki orders
-            if ($customer->orders()->count() > 0) {
-                // Jika masih ada orders, lempar pengecualian
-                throw new \Exception('Customers cannot be deleted because they still have orders');
-            }
-
-            // Hapus customer
-            $customer->delete();
-
-            return redirect()->route('customers.index')->with('success', 'Customer Deleted Successfully');
-        } catch (\Exception $e) {
-            // Tangani pengecualian dan arahkan kembali dengan pesan error
+        if ($customer->orders()->exists()) {
             return redirect()->route('customers.index')
-                             ->with('error', $e->getMessage());
+                             ->withErrors('Customers cannot be deleted because they still have orders.');
         }
+
+        $customer->delete();
+
+        return redirect()->route('customers.index')->with('success', 'Customer Deleted Successfully');
     }
 
 }

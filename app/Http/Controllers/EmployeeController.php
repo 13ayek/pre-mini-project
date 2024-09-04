@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
-use App\Http\Requests\StoreEmployeeRequest;
-use App\Http\Requests\UpdateEmployeeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -13,9 +11,17 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $employees = Employee::all();
+        $query = Employee::query();
+
+        if ($search = $request->input('search')) {
+            $query->where('name','like','%'. $search .'%')
+                  ->orWhere('email','like','%'. $search .'%')
+                  ->orWhere('phone_number','like','%'. $search .'%')
+                  ->orWhere('position', 'like', '%'. $search .'%');
+        }
+        $employees = $query->simplePaginate(5);
         return view("employees.index", compact("employees"));
     }
 
