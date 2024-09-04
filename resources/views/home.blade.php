@@ -15,18 +15,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-
-        <style>
-            body {
-                background-color: #add8e6; /* Biru muda */
-            }
-            /* CSS untuk menyamakan ukuran gambar dalam card */
-            .card-img-top {
-                width: 100%;
-                height: 200px; /* Anda bisa menyesuaikan tinggi sesuai keinginan */
-                object-fit: cover; /* Mengatur agar gambar memenuhi ruang tanpa distorsi */
-            }
-        </style>
     </head>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
