@@ -11,20 +11,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return view('home');
+    });
 
-route::resources([
-    'customers'=> CustomerController::class,
-    'services' => ServiceController::class,
-    'orders' => OrderController::class,
-    'payments' => PaymentController::class,
-    'laundryItems' => LaundryItemController::class,
-    'employees' => EmployeeController::class,
-    'employeeAssignments' => EmployeeAssignmentController::class,
-]);
+    route::resources([
+        'customers'=> CustomerController::class,
+        'services' => ServiceController::class,
+        'orders' => OrderController::class,
+        'payments' => PaymentController::class,
+        'laundryItems' => LaundryItemController::class,
+        'employees' => EmployeeController::class,
+        'employeeAssignments' => EmployeeAssignmentController::class,
+    ]);
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
