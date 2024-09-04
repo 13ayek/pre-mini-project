@@ -12,7 +12,7 @@
                     <tr>
                         <th>No.</th>
                         <th>Employee Name</th>
-                        <th>Service</th>
+                        <th>Service Sector</th>
                         <th>Schedule</th>
                         <th>Action</th>
                     </tr>

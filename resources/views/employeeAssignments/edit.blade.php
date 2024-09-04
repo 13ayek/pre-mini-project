@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="service_id" class="form-label">Service:</label>
+                    <label for="service_id" class="form-label">Service sector:</label>
                     <select name="service_id" class="form-control" id="service_id">
                         <option value="" disabled> - </option>
                         @foreach ($services as $service)
