@@ -51,7 +51,7 @@
                     </tbody>
                 </table>
                 <div class="pagination">
-                    {{ $employee->links() }}
+                    {{ $employees->links() }}
                 </div>
                 </div>
             </div>
