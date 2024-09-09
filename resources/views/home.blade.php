@@ -1,9 +1,9 @@
 @extends('layouts.base')
 
 @section('content')
+    <!DOCTYPE html>
+    <html lang="en">
 
-<!DOCTYPE html>
-<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -16,6 +16,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
+
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
             <!-- Page Content-->
@@ -28,14 +29,17 @@
                                     <div class="p-4 p-md-5">
                                         <div class="h2 fw-bolder">Welcome to CleanDream!</div>
                                         <p>Make your clothes clean like a dream...</p>
-                                        <a class="stretched-link text-decoration-none" href="{{ route('customers.index') }}">
+                                        <a class="stretched-link text-decoration-none"
+                                            href="{{ route('customers.index') }}">
                                             Read more
                                             <i class="bi bi-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-xl-7">
-                                    <div class="bg-featured-blog" style="background-image: url('/path/to/image/A_cartoon_illustration_of_a_washing_machine,_desig.png'); background-size: cover; background-position: center;"></div>
+                                    <div class="bg-featured-blog"
+                                        style="background-image: url('/path/to/image/A_cartoon_illustration_of_a_washing_machine,_desig.png'); background-size: cover; background-position: center;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -49,30 +53,40 @@
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="foto/Rincian-Modal-Usaha-Laundry-dan-Estimasi-Profitnya.avif" alt="foto1" />
+                                <img class="card-img-top" src="foto/Rincian-Modal-Usaha-Laundry-dan-Estimasi-Profitnya.avif"
+                                style="height: 53%; object-fit: cover;"
+                                    alt="foto1" />
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">Clean</div>
-                                    <a class="text-decoration-none link-dark stretched-link"><div class="h5 card-title mb-3">100% Clean</div></a>
+                                    <a class="text-decoration-none link-dark stretched-link">
+                                        <div class="h5 card-title mb-3">100% Clean</div>
+                                    </a>
                                     <p class="card-text mb-0">make your clothes clean like new</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="foto/modal-usaha-laundry-2023.jpeg" alt="foto2" />
+                                <img class="card-img-top" src="foto/modal-usaha-laundry-2023.jpeg" alt="foto2"/>
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">Facilities</div>
-                                    <a class="text-decoration-none link-dark stretched-link"><div class="h5 card-title mb-3">Advanced Facilities</div></a>
+                                    <a class="text-decoration-none link-dark stretched-link">
+                                        <div class="h5 card-title mb-3">Advanced Facilities</div>
+                                    </a>
                                     <p class="card-text mb-0">equipped with complete state-of-the-art facilities</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="foto/WhatsApp-Image-2023-07-16-at-2.03.40-PM-1.jpeg" alt="foto3" />
+                                <img class="card-img-top" src="foto/WhatsApp-Image-2023-07-16-at-2.03.40-PM-1.jpeg"
+                                style="height: 53%; object-fit: cover;"
+                                    alt="foto3" />
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">Employee</div>
-                                    <a class="text-decoration-none link-dark stretched-link"><div class="h5 card-title mb-3">active employees</div></a>
+                                    <a class="text-decoration-none link-dark stretched-link">
+                                        <div class="h5 card-title mb-3">active employees</div>
+                                    </a>
                                     <p class="card-text mb-0">Employees are active and work fast</p>
                                 </div>
                             </div>
@@ -85,7 +99,9 @@
         <footer class="bg-dark py-4 mt-auto">
             <div class="container px-5">
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; CleanDream</div></div>
+                    <div class="col-auto">
+                        <div class="small m-0 text-white">Copyright &copy; CleanDream</div>
+                    </div>
                     <div class="col-auto">
                         <a class="link-light small" href="">Privacy</a>
                         <span class="text-white mx-1">&middot;</span>
@@ -97,10 +113,18 @@
             </div>
         </footer>
         <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+        </script>
         <script src="js/scripts.js"></script>
     </body>
-</html>
 
+    </html>
 @endsection

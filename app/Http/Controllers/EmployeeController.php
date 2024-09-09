@@ -16,12 +16,16 @@ class EmployeeController extends Controller
         $query = Employee::query();
 
         if ($search = $request->input('search')) {
-            $query->where('name','like','%'. $search .'%')
-                  ->orWhere('email','like','%'. $search .'%')
-                  ->orWhere('phone_number','like','%'. $search .'%')
-                  ->orWhere('position', 'like', '%'. $search .'%');
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhere('phone_number', 'like', '%' . $search . '%')
+                ->orWhere('position', 'like', '%' . $search . '%');
         }
-        $employees = $query->simplePaginate(5);
+
+        // Paginasi hasil query
+        $employees = $query->paginate(5);
+
+        // Mengirim data ke view
         return view("employees.index", compact("employees"));
     }
 
@@ -47,7 +51,7 @@ class EmployeeController extends Controller
         ]);
 
         // Pastikan semua field yang diperlukan termasuk 'email' dimasukkan di sini
-        Employee::create($request->all());
+        Employee::create($request->only(['name', 'position', 'phone_number', 'email', 'hire_date']));
 
         return redirect()->route('employees.index')->with('success', 'Employee Created Successfully');
     }
@@ -81,7 +85,8 @@ class EmployeeController extends Controller
             'email' => ['required', 'email', 'max:100', Rule::unique('employees', 'email')->ignore($employee->id)],
             'hire_date' => 'required|date',
         ]);
-        $employee->update($request->all());
+
+        $employee->update($request->only(['name', 'position', 'phone_number', 'email', 'hire_date']));
         return redirect()->route('employees.index')->with('success', 'Employee Updated Successfully');
     }
 
