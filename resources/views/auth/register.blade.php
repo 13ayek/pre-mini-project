@@ -3,20 +3,20 @@
 @section('content')
     <style>
         body {
-            background-image: url('{{ asset('foto/bg.png') }}');
-            background-size: cover;
+            background-color: #86cdff;
+            /* Biru muda */
             font-family: Arial, sans-serif;
         }
 
         .card {
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background: #ffffffcc;
+            background: #fff;
             margin-top: 5%;
         }
 
         .card-header {
-            background-color: #00bdca;
+            background-color: #007bff;
             color: #fff;
             font-weight: bold;
             text-align: center;
