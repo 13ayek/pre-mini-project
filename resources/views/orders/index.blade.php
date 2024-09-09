@@ -34,7 +34,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $order->customer->name }}</td>
                     <td>{{ $order->service->service_name }}</td>
-                    <td>{{ $order->order_date }}</td>
+                    <td>{{ \carbon\carbon::parse($order->order_date)->translatedFormat('d M Y') }}</td>
                     <td>{{ $order->status }}</td>
                     <td>Rp{{ number_format($order->total_price, 2,',','.') }}</td>
                     <td>
