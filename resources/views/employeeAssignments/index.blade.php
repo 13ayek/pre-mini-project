@@ -5,7 +5,7 @@
         <div class="container mt-5">
             <div class="container">
                 <h1>Employee Assignment</h1><br>
-                <a href="{{ route('employeeAssignments.create') }}" type="button" class="btn btn-outline-info mb-3">Add</a>
+                <a href="{{ route('employeeAssignments.create') }}" type="button" class="btn btn-outline-info mb-3">Add New Assignment</a>
             </div>
             <table class="table table-bordered">
                 <thead>

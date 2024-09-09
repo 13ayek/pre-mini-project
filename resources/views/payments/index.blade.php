@@ -6,7 +6,7 @@
                 <h1>Payment</h1><br>
                 <div class="row mb-3">
                     <div class="justify-content-end">
-                        <a href="{{ route('payments.create') }}" class="btn btn-outline-info me-2 mb-2">Add New Item</a>
+                        <a href="{{ route('payments.create') }}" class="btn btn-outline-info me-2 mb-2">Add New Payment</a>
                         <form action="{{ route('payments.index') }}" method="GET" class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Search..."
                                 value="{{ request('search') }}" autocomplete="off">
@@ -60,5 +60,6 @@
                 </div> --}}
             </div>
         </div>
+        .
     </main>
 @endsection

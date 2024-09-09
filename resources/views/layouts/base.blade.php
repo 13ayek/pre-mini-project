@@ -14,6 +14,10 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+CU:wght@100..400&display=swap"
+        rel="stylesheet">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -66,6 +70,8 @@
             color: #dfefff;
         }
 
+
+
         .content {
             margin-top: 56px;
             /* Menambahkan margin top sebesar tinggi navbar */
@@ -80,6 +86,12 @@
             background-color: #e3f2fd;
             /* Contoh background untuk konten */
         }
+
+        .pacifico-regular {
+            font-family: "Pacifico", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
     </style>
 
 </head>
@@ -90,8 +102,9 @@
         <!-- Sidebar -->
         <nav id="sidebar" class="bg-light border-end shadow p-3 mb-5 bg-body-tertiary rounded">
             <div class="sidebar-header p-3 fs-2 fw-bold">
-                <a class="navbar-brand" href="{{ url('home') }}">CleanDream</a>
+                <a class="navbar-brand pacifico-regular" href="{{ url('home') }}">CleanDream</a>
             </div>
+
             <ul class="nav flex-column p-3">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('customers.index') }}">Customers</a>
@@ -101,9 +114,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('orders.index') }}">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('laundryItems.index') }}">Laundry Items</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('payments.index') }}">Payments</a>

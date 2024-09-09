@@ -6,7 +6,7 @@
                 <h1>Employee</h1><br>
                 <div class="row mb-3">
                     <div class="justify-content-end">
-                        <a href="{{ route('employees.create') }}" class="btn btn-outline-info me-2 mb-2">Add New Customer</a>
+                        <a href="{{ route('employees.create') }}" class="btn btn-outline-info me-2 mb-2">Add New Employee</a>
                         <form action="{{ route('employees.index') }}" method="GET" class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Search..."
                                 value="{{ request('search') }}" autocomplete="off">

@@ -9,7 +9,7 @@
 
             <p><strong>Customer Name:</strong> {{ $order->customer->name }}</p>
             <p><strong>Service Name:</strong> {{ $order->service->service_name }}</p>
-            <p><strong>Order Date:</strong> {{ $order->order_date }}</p>
+            <p><strong>Order Date:</strong> {{ \carbon\carbon::parse($order->order_date)->translatedFormat('d M Y') }}</p>
             <p><strong>Status:</strong> {{ $order->status }}</p>
                 @foreach ($order->laundryItems as $item)
                     <p><strong>Item Name : </strong>{{ $item->item_name }}</p>
