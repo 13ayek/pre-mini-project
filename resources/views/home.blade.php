@@ -54,7 +54,6 @@
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
                                 <img class="card-img-top" src="foto/Rincian-Modal-Usaha-Laundry-dan-Estimasi-Profitnya.avif"
-                                style="height: 53%; object-fit: cover;"
                                     alt="foto1" />
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">Clean</div>
@@ -67,7 +66,7 @@
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="foto/modal-usaha-laundry-2023.jpeg" alt="foto2"/>
+                                <img class="card-img-top" src="foto/modal-usaha-laundry-2023.jpeg" alt="foto2" />
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">Facilities</div>
                                     <a class="text-decoration-none link-dark stretched-link">
@@ -80,7 +79,6 @@
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
                                 <img class="card-img-top" src="foto/WhatsApp-Image-2023-07-16-at-2.03.40-PM-1.jpeg"
-                                style="height: 53%; object-fit: cover;"
                                     alt="foto3" />
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">Employee</div>
