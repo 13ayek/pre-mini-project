@@ -14,11 +14,16 @@
                         <option value="">Select Customer</option>
                         @foreach ($customers as $customer)
                             @foreach ($customer->orders as $order)
-                                <option value="{{ $order->id }}">{{ $customer->name }} - Order #{{ $order->id }}
+                                <option value="{{ $order->id }}">{{ $customer->name }} - Rp.{{ number_format($order->total_price, 0, ',', '.') }}
                                 </option>
                             @endforeach
                         @endforeach
                     </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Money Paid Off</label>
+                    <input type="number" name="amount" class="form-control" id="amount" value="{{ old('amount') }}">
                 </div>
 
                 <div>
@@ -34,12 +39,6 @@
                             <option value="E-Wallet" {{ old('payment_method') == 'E-Wallet' ? 'selected' : '' }}>E-Wallet
                             </option>
                         </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="amount" class="form-label">Money Paid Off</label>
-                        <input type="number" name="amount" class="form-control" id="amount"
-                            value="{{ old('amount') }}">
                     </div>
 
                     <div class="mb-3">

@@ -2,20 +2,20 @@
 @section('content')
     <style>
         body {
-            background-color: #86cdff;
-            /* Biru muda */
+            background-image: url('{{ asset('foto/bg.png') }}');
+            background-size: cover;
             font-family: Arial, sans-serif;
         }
 
         .card {
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background: #fff;
+            background: #ffffffcc;
             margin-top: 5%;
         }
 
         .card-header {
-            background-color: #007bff;
+            background-color: #00bdca;
             color: #fff;
             font-weight: bold;
             text-align: center;
