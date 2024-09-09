@@ -26,7 +26,7 @@
                         <option value="" disabled selected> Select Service Name </option>
                         @foreach ($service as $service)
                             <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? 'selected' : '' }}>
-                                {{ $service->service_name }}
+                                {{ $service->service_name }} - Rp. {{ number_format($service->price, 2, ',', '.') }}
                             </option>
                         @endforeach
                     </select>
@@ -34,7 +34,25 @@
 
                 <div class="mb-3">
                     <label for="order_date" class="form-label">order_date</label>
-                    <input type="date" name="order_date" class="form-control" id="order_date" {{ old('order_date') }}>
+                    <input type="date" name="order_date" class="form-control" id="order_date"
+                        value="{{ old('order_date') }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="item_name" class="form-label">Item Name</label>
+                    <input type="text" name="item_name" id="item_name" class="form-control"
+                        value="{{ old('item_name') }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control"
+                        value="{{ old('quantity') }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="weight" class="form-label">Weight (kg)</label>
+                    <input type="text" name="weight" id="weight" class="form-control" value="{{ old('weight') }}">
                 </div>
 
                 <div>
@@ -51,18 +69,9 @@
                             </option>
                         </select>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="total_price" class="form-label">Total Price</label>
-                        <input type="number" name="total_price" class="form-control" id="total_price"
-                            value="{{ old('total_price') }}">
-                    </div>
-
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="{{ route('orders.index') }}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </main>
 @endsection
-
-</div>
