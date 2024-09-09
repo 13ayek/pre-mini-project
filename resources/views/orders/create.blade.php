@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="weight" class="form-label">Weight (kg)</label>
+                    <label for="weight" class="form-label">Weight (kg) | 5000/kg</label>
                     <input type="text" name="weight" id="weight" class="form-control" value="{{ old('weight') }}">
                 </div>
 
