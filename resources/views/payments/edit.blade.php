@@ -14,11 +14,17 @@
                     <select name="order_id" id="customer" class="form-select" required>
                         @foreach ($orders as $order)
                             <option value="{{ $order->id }}" {{ $order->id == $payment->order_id ? 'selected' : '' }}>
-                                {{ $order->customer->name }} - Order #{{ $order->id }}
+                                {{ $order->customer->name }} - Rp.{{ number_format($order->total_price, 0, ',', '.') }}
                             </option>
                         @endforeach
                     </select>
                 </div>
+
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Money Paid Off</label>
+                    <input type="number" name="amount" class="form-control" id="amount" value="{{ $payment->amount }}">
+                </div>
+
                 <div class="mb-3">
                     <label for="payment_method" class="form-label">Payment Method</label>
                     <select name="payment_method" class="form-control" id="payment_method">
@@ -33,10 +39,7 @@
                     </select>
                 </div>
 
-                <div class="mb-3">
-                    <label for="amount" class="form-label">Money Paid Off</label>
-                    <input type="number" name="amount" class="form-control" id="amount" value="{{ $payment->amount }}">
-                </div>
+
 
                 <div class="mb-3">
                     <label for="payment_date" class="form-label">Payment Date</label>
