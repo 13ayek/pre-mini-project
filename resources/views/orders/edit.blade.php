@@ -38,6 +38,24 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="item_name" class="form-label">Item Name</label>
+                    <input type="text" name="item_name" class="form-control" id="item_name"
+                        value="{{ $order->item_name }}">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" name="quantity" class="form-control" id="quantity"
+                    value="{{ $order->quantity }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="weight" class="form-label">Weight</label>
+                    <input type="number" name="weight" class="form-control" id="weight"
+                        value="{{ $order->weight }}">
+                </div>
+
+                <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select name="status" class="form-control" id="status">
                         <option value="Pending" {{ $order->status == 'Pending' ? 'selected' : '' }}>Pending</option>
@@ -46,12 +64,6 @@
                         <option value="Completed" {{ $order->status == 'Completed' ? 'selected' : '' }}>Completed</option>
                         <option value="Cancelled" {{ $order->status == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
                     </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="total_price" class="form-label">Total Price</label>
-                    <input type="number" name="total_price" class="form-control" id="total_price"
-                        value="{{ $order->total_price }}">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save Changes</button>
