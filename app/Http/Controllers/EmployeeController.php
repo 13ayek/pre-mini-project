@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
@@ -42,12 +42,16 @@ class EmployeeController extends Controller
             'name' => 'required|string|max:100',
             'position' => 'required|string|max:50',
             'phone_number' => 'required|string|max:15|unique:employees,phone_number',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'email' => 'required|email|max:100|unique:employees,email',
             'hire_date' => 'required|date',
         ]);
 
-        // Pastikan semua field yang diperlukan termasuk 'email' dimasukkan di sini
-        Employee::create($request->all());
+        $validateData = $request->only('name','position','phone_number','email','hire_date');
+        if ($request->hasFile('image')) {
+            $validateData['image'] = $request->file('image')->store('employee_images','public');
+        }
+        Employee::create($validateData);
 
         return redirect()->route('employees.index')->with('success', 'Employee Created Successfully');
     }
@@ -79,9 +83,17 @@ class EmployeeController extends Controller
             'position' => 'required|string|max:50',
             'phone_number' => ['required', 'string', 'max:15', Rule::unique('employees', 'phone_number')->ignore($employee->id)],
             'email' => ['required', 'email', 'max:100', Rule::unique('employees', 'email')->ignore($employee->id)],
+            'image' => ['nullable','image','mimes:jpeg,png,jpg','max:2048'],
             'hire_date' => 'required|date',
         ]);
-        $employee->update($request->all());
+
+        if ($request->hasFile('image')) {
+            if ($employee->image) {
+                Storage::disk('public')->delete($employee->image);
+            }
+            $validatedData['image'] = $request->file('image')->store('employee_images','public');
+        }
+        $employee->update($validatedData);
         return redirect()->route('employees.index')->with('success', 'Employee Updated Successfully');
     }
 
@@ -90,6 +102,10 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
+        if ($employee->employeeAssignments()->exists()) {
+            return redirect()->route('employees.index')
+                             ->withErrors('Employee cannot be deleted because they still have Contract.');
+        }
         $employee->delete();
         return redirect()->route('employees.index')->with('success', 'Employee Deleted Succesfully');
     }

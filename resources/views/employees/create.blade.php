@@ -5,7 +5,7 @@
     <div class="container">
         <h1>Create Employees</h1>
 
-        <form action="{{ route('employees.store') }}" method="POST">
+        <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
@@ -21,6 +21,11 @@
             <div class="mb-3">
                 <label for="phone_number" class="form-label">Phone Number :</label>
                 <input type="number" name="phone_number" class="form-control" id="phone_number" value="{{ old('phone_number') }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Image :</label>
+                <input type="file" name="image" class="form-control" id="image" >
             </div>
 
             <div class="mb-3">

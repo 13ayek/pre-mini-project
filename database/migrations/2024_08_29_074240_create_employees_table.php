@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone_number')->unique();
+            $table->string('image')->nullable();
             $table->string('position');
             $table->date('hire_date');
             $table->timestamps();
