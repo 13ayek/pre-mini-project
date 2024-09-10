@@ -1,23 +1,32 @@
 @extends('layouts.base')
 
 @section('content')
-    <main>
-        <div class="container mt-5">
-            <div class="container">
-                <div class="row mb-3">
-
-                    <h1>Service</h1>
-                </div>
-                <div class="row mb-3">
-                    <div class="justify-content-end">
-                        <a href="{{ route('services.create') }}" class="btn btn-outline-info me-2 mb-2">Add New Service</a>
-                        <form action="{{ route('services.index') }}" method="GET" class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Search..."
-                                value="{{ request('search') }}" autocomplete="off">
-                            <button type="submit" class="btn btn-outline-primary">Search</button>
+<main>
+    <div class="container mt-5">
+        <div class="card shadow-lg border-0 rounded-4 p-4">
+            <div class="card-header bg-info text-white text-center rounded-4">
+                <h2 class="fw-bold mb-0">Service List</h2>
+            </div>
+            <div class="card-body">
+                <!-- Add New Service Button and Search Form -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <a href="{{ route('services.create') }}" class="btn btn-outline-info">Add New Service</a>
+                    </div>
+                    <div class="col-md-6">
+                        <form action="{{ route('services.index') }}" method="GET" class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" name="search" placeholder="Search..."
+                                    value="{{ request('search') }}" autocomplete="off">
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-outline-primary">Search</button>
+                            </div>
                         </form>
                     </div>
                 </div>
+
+                <!-- Services Table -->
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -34,25 +43,26 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $service->service_name }}</td>
                                 <td>{{ $service->description }}</td>
-                                <td>Rp. {{ number_format($service->price, 2, ',', '.') }}</td>
+                                <td>Rp {{ number_format($service->price, 2, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('services.edit', $service->id) }}"
-                                        class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="{{ route('services.destroy', $service->id) }}" method="POST"
-                                        class="d-inline">
+                                    <a href="{{ route('services.edit', $service->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="{{ route('services.destroy', $service->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus penumpang ini?');">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this?');">Delete</button>
                                     </form>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                <div class="pagination">
+
+                <!-- Pagination -->
+                <div class="pagination mt-3">
                     {{ $services->links() }}
                 </div>
             </div>
-    </main>
+        </div>
+    </div>
+</main>
 @endsection
