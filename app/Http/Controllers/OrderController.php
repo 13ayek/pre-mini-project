@@ -59,10 +59,10 @@ class OrderController extends Controller
             'customer_id' => 'required|exists:customers,id',
             'service_id' => 'required|exists:services,id',
             'order_date' => 'required|date|after_or_equal:today',
-            'status' => 'required|in:Pending,In Progress,Completed,Cancelled',
             'item_name' => 'required|string|max:255',
             'quantity' => 'required|integer|min:1',
-            'weight' => 'required|numeric|min:0',
+            'weight' => 'required|numeric|min:1',
+            'status' => 'required|in:Pending,In Progress,Completed,Cancelled',
         ]);
 
         $service = Service::find($request->service_id);
@@ -118,11 +118,11 @@ public function update(Request $request, Order $order)
     $request->validate([
         'customer_id' => 'required|exists:customers,id',
         'service_id' => 'required|exists:services,id',
-        'order_date' => 'required|date|after_or_equal:today',
-        'status' => 'required|in:Pending,In Progress,Completed,Cancelled',
         'item_name' => 'required|string|max:255',
         'quantity' => 'required|integer|min:1',
         'weight' => 'required|numeric|min:0',
+        'order_date' => 'required|date|after_or_equal:today',
+        'status' => 'required|in:Pending,In Progress,Completed,Cancelled',
     ]);
 
     $service = Service::findOrFail($request->service_id);

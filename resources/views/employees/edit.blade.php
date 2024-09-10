@@ -5,7 +5,7 @@
     <div class="container">
         <h1>Edit Employee</h1>
 
-        <form action="{{ route('employees.update', $employee->id) }}" method="POST">
+        <form action="{{ route('employees.update', $employee->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT') <!-- Directive untuk HTTP PUT -->
 
@@ -22,6 +22,11 @@
             <div class="mb-3">
                 <label for="phone_number" class="form-label">Phone Number :</label>
                 <input type="number" name="phone_number" class="form-control" id="phone_number" value="{{ $employee->phone_number }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Image :</label>
+                <input type="file" name="image" class="form-control" id="image" value="{{ $employee->image }}">
             </div>
 
             <div class="mb-3">

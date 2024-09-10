@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'email' , 'phone_number', 'position', 'hire_date'];
+    protected $fillable = ['name', 'email' , 'phone_number','image', 'position', 'hire_date'];
 
     public function service()
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function EmployeeAssignments()
+    {
+        return $this->hasMany(EmployeeAssignment::class);
     }
 }

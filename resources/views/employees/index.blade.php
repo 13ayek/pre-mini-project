@@ -21,6 +21,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Image</th>
                             <th>Position</th>
                             <th>Hire Date</th>
                             <th>Action</th>
@@ -33,6 +34,10 @@
                                 <td>{{ $employee->name }}</td>
                                 <td>{{ $employee->email }}</td>
                                 <td>{{ $employee->phone_number }}</td>
+                                <td>@if($employee->image)
+                                    <img src="{{ Storage::url($employee->image) }}" alt="{{ $employee->name }}" style="width: 100px;">
+                                @endif
+                                </td>
                                 <td>{{ $employee->position }}</td>
                                 <td>{{ $employee->hire_date }}</td>
                                 <td>
