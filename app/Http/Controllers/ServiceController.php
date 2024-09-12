@@ -86,12 +86,12 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         if ($service->orders()->exists()) {
-            return redirect()->route('customers.index')
+            return redirect()->route('services.index')
                              ->withErrors('Customers cannot be deleted because they still have orders.');
         }
 
         $service->delete();
 
-        return redirect()->route('customers.index')->with('success', 'Customer Deleted Successfully');
+        return redirect()->route('services.index')->with('success', 'Customer Deleted Successfully');
     }
 }
