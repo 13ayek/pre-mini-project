@@ -14,13 +14,28 @@
                             <h3 class="text-center text-dark">Create Payment</h3>
                             <p class="text-muted text-center">Please fill in the form below correctly</p>
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            
                             <div class="mb-3">
                                 <label for="order_id" class="form-label">Order</label>
                                 <select name="order_id" id="order_id" class="form-select">
                                     <option value="" disabled selected>Select Order Name</option>
                                     @foreach ($customers as $customer)
                                         @foreach ($customer->orders as $order)
-                                            <option value="{{ $order->id }}">{{ $customer->name }} - Rp.{{ number_format($order->total_price, 0, ',', '.') }}</option>
+                                            <option value="{{ $order->id }}" data-order-date="{{ $order->order_date }}">{{ $customer->name }} ({{ $customer->email }}) - Rp.{{ number_format($order->total_price, 0, ',', '.') }}</option>
                                         @endforeach
                                     @endforeach
                                 </select>
@@ -57,4 +72,16 @@
             </div>
         </div>
     </main>
+
+    <script>
+        document.getElementById('order_id').addEventListener('change', function() {
+            // Mendapatkan tanggal order dari opsi yang dipilih
+            var selectedOption = this.options[this.selectedIndex];
+            var orderDate = selectedOption.getAttribute('data-order-date');
+
+            // Mengatur tanggal minimum untuk input tanggal pembayaran
+            var paymentDateInput = document.getElementById('payment_date');
+            paymentDateInput.min = orderDate;
+        });
+    </script>
 @endsection

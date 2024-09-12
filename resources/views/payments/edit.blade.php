@@ -15,11 +15,27 @@
                             <h3 class="text-center text-dark">Edit Payment</h3>
                             <p class="text-muted text-center">Please update the payment details below</p>
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            
                             <div class="mb-3">
                                 <label for="order_id" class="form-label">Order</label>
                                 <select name="order_id" id="order_id" class="form-select" required>
                                     @foreach ($orders as $order)
-                                        <option value="{{ $order->id }}" {{ $order->id == $payment->order_id ? 'selected' : '' }}>
+                                        <option value="{{ $order->id }}" data-order-date="{{ $order->order_date }}"
+                                            {{ $order->id == $payment->order_id ? 'selected' : '' }}>
                                             {{ $order->customer->name }} - Rp.{{ number_format($order->total_price, 0, ',', '.') }}
                                         </option>
                                     @endforeach
@@ -57,4 +73,24 @@
             </div>
         </div>
     </main>
+
+    <!-- JavaScript untuk validasi -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var orderSelect = document.getElementById('order_id');
+            var paymentDateInput = document.getElementById('payment_date');
+
+            // Set minimum date based on the initially selected order
+            setMinDate();
+
+            // Update the minimum date whenever the order selection changes
+            orderSelect.addEventListener('change', setMinDate);
+
+            function setMinDate() {
+                var selectedOption = orderSelect.options[orderSelect.selectedIndex];
+                var orderDate = selectedOption.getAttribute('data-order-date');
+                paymentDateInput.min = orderDate;
+            }
+        });
+    </script>
 @endsection

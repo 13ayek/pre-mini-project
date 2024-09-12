@@ -182,7 +182,7 @@
         <div class="d-flex">
             <div class="content flex-grow-1">
                 <div class="mt-4">
-                    @if ($errors->any())
+                    {{-- @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
@@ -190,12 +190,12 @@
                                 @endforeach
                             </ul>
                         </div>
-                    @endif
-                    @if (session('success'))
+                    @endif --}}
+                    {{-- @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
                         </div>
-                    @endif
+                    @endif --}}
                 </div>
                 <main class="container">
                     @yield('content')

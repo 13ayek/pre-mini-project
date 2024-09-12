@@ -14,6 +14,22 @@
                             <h3 class="text-center text-dark">Add New Customer</h3>
                             <p class="text-muted text-center">Please fill in the form below correctly</p>
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+
                             <div class="mb-3">
                                 <label for="name" class="form-label">Customer Name</label>
                                 <div class="input-group">
@@ -43,13 +59,13 @@
 
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <textarea name="address" class="form-control" id="address" rows="3"
-                                    placeholder="Enter address">{{ old('address') }}</textarea>
+                                <textarea name="address" class="form-control" id="address" rows="3" placeholder="Enter address">{{ old('address') }}</textarea>
                             </div>
 
                             <div class="justify-content-between mt-4">
                                 <button type="submit" class="btn btn-primary btn-lg px-4">Submit</button>
-                                <a href="{{ route('customers.index') }}" class="btn btn-outline-secondary btn-lg px-4">Cancel</a>
+                                <a href="{{ route('customers.index') }}"
+                                    class="btn btn-outline-secondary btn-lg px-4">Cancel</a>
                             </div>
                         </div>
                     </div>

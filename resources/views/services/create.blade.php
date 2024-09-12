@@ -14,6 +14,21 @@
                             <h3 class="text-center text-dark">Add New Service</h3>
                             <p class="text-muted text-center">Please fill in the form below to create a new service</p>
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            
                             <div class="mb-3">
                                 <label for="service_name" class="form-label">Service Name</label>
                                 <div class="input-group">
