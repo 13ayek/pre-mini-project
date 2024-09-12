@@ -26,7 +26,7 @@
                         </div>
                     </div>
 
-                    <x-session/>
+                    <x-session />
 
                     <!-- Employee Table -->
                     <table class="table table-bordered">
@@ -51,6 +51,32 @@
                                             <img src="{{ Storage::url($employee->image) }}" alt="{{ $employee->name }}"
                                                 class="rounded-circle"
                                                 style="width: 50px; height: 50px; object-fit: cover;">
+                                            {{-- <a href="" data-bs-toggle="modal"
+                                                data-bs-target="#imageModal-{{ $employee->id }}">
+                                                <i class="fas fa-search"></i> <!-- Zoom icon -->
+                                            </a>
+                                            @foreach ($employees as $employee)
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="imageModal-{{ $employee->id }}" tabindex="-1"
+                                                    aria-labelledby="imageModalLabel-{{ $employee->id }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"
+                                                                    id="imageModalLabel-{{ $employee->id }}">
+                                                                    {{ $employee->name }}</h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body text-center">
+                                                                <img src="{{ Storage::url($employee->image) }}"
+                                                                    alt="{{ $employee->name }}" class="img-fluid">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach --}}
                                         @endif
                                     </td>
 

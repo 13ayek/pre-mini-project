@@ -28,9 +28,6 @@
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-white">
-                                        <i class="bi bi-telephone text-primary">+62</i>
-                                    </span>
                                     <input type="text" name="phone" class="form-control" id="phone"
                                         placeholder="Enter phone number" value="{{ $customer->phone }}">
                                 </div>
@@ -39,7 +36,7 @@
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <div class="input-group">
-                                    <input type="email" name="email" class="form-control" id="email"
+                                    <input type="text" name="email" class="form-control" id="email"
                                         placeholder="Enter email address" value="{{ $customer->email }}">
                                 </div>
                             </div>

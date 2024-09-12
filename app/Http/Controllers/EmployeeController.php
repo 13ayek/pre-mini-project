@@ -33,7 +33,7 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|email|max:100|unique:employees,email',
-            'phone_number' => 'required|string|max:15|unique:employees,phone_number',
+            'phone_number' => 'required|string|min:11|max:12|unique:employees,phone_number',
             'image' => 'nullable|mimes:jpeg,png,jpg|max:5048', // menggunakan mimes untuk validasi format file
             'position' => 'required|string|max:50',
             'hire_date' => 'required|date',
@@ -43,7 +43,8 @@ class EmployeeController extends Controller
             'position.required' => 'The position is required.',
             'position.max' => 'The position must not exceed 50 characters.',
             'phone_number.required' => 'The phone number is required.',
-            'phone_number.max' => 'The phone number must not exceed 15 digits.',
+            'phone_number.min' => 'The phone number value must be more than 11 digits',
+            'phone_number.max' => 'The phone number value Cannot be more than 12 digits',
             'phone_number.unique' => 'The phone number is already in use.',
             'image.mimes' => 'The image must be a valid format (jpeg, png, jpg).',
             'image.max' => 'The image size must not exceed 5 MB.',
@@ -69,6 +70,11 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')->with('success', 'Employee Created Successfully');
     }
 
+    public function show($id)
+    {
+        $employee = Employee::all()->findOrFail($id);
+        return view('employees.show', compact('employee'));
+    }
 
     public function edit(Employee $employee)
     {
@@ -80,7 +86,7 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'position' => 'required|string|max:50',
-            'phone_number' => ['required', 'string', 'max:15', Rule::unique('employees', 'phone_number')->ignore($employee->id)],
+            'phone_number' => ['required', 'string','min:11', 'max:12', Rule::unique('employees', 'phone_number')->ignore($employee->id)],
             'email' => ['required', 'email', 'max:100', Rule::unique('employees', 'email')->ignore($employee->id)],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:5048'],
             'hire_date' => 'required|date',
@@ -90,7 +96,8 @@ class EmployeeController extends Controller
             'position.required' => 'The position is required.',
             'position.max' => 'The position must not exceed 50 characters.',
             'phone_number.required' => 'The phone number is required.',
-            'phone_number.max' => 'The phone number must not exceed 15 digits.',
+            'phone_number.min' => 'The phone number value must be more than 11 digits',
+            'phone_number.max' => 'The phone number value Cannot be more than 12 digits',
             'phone_number.unique' => 'The phone number is already in use.',
             'image.image' => 'The image must be a valid image format (jpeg, png, jpg).',
             'image.mimes' => 'The image format must be jpeg, png, or jpg.',

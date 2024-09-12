@@ -25,7 +25,7 @@
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email :</label>
-                            <input type="email" name="email" class="form-control" id="email" value="{{ $employee->email }}">
+                            <input type="text" name="email" class="form-control" id="email" value="{{ $employee->email }}">
                         </div>
 
                         <div class="mb-3">
