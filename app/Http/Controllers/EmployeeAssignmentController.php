@@ -20,7 +20,7 @@ class EmployeeAssignmentController extends Controller
             ->get()
             ->groupBy('employee_id');
 
-        return view('employeeAssignments.index', compact('employeeAssignments'));
+        return view('employeeAssignments.index', compact("employeeAssignments"));
     }
 
     /**

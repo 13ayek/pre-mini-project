@@ -16,21 +16,8 @@
                         <h3 class="text-center text-dark">Edit Employee</h3>
                         <p class="text-muted text-center">Update the employee details below</p>
 
-                        @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            
+                        <x-session/>
+
                         <div class="mb-3">
                             <label for="name" class="form-label">Name :</label>
                             <input type="text" name="name" class="form-control" id="name" value="{{ $employee->name }}">

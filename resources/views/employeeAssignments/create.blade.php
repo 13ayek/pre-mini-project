@@ -15,21 +15,8 @@
                         <h3 class="text-center text-dark">Create Employee Assignments</h3>
                         <p class="text-muted text-center">Fill in the details below to create a new assignment</p>
 
-                        @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            
+                        <x-session/>
+
                         <div class="mb-3">
                             <label for="employee_id" class="form-label">Employee</label>
                             <select name="employee_id" class="form-select" id="employee_id">
