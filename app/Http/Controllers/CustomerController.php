@@ -42,7 +42,7 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email'=> 'required|email|max:255|unique:customers,email,except,id',
-            'phone' => ['required','string','max:12','regex:/^[0-9]+$/','unique:customers,phone,except,id'],
+            'phone' => ['required','string','min:11','max:12','regex:/^[0-9]+$/','unique:customers,phone,except,id'],
             'address' => 'required|string|max:255',
         ],[
             'name.required' => 'Name is required',
@@ -51,6 +51,8 @@ class CustomerController extends Controller
             'email.unique' => 'This email is already taken',
             'phone.required' => 'Phone number is required',
             'phone.regex' => 'The phone number value cannot be below 0',
+            'phone.min' => 'The phone number value must be more than 11 digits',
+            'phone.max' => 'The phine number value Cannot be more than 11 digits',
             'phone.unique'=> 'This phone number is already taken',
         ]);
 
@@ -83,7 +85,7 @@ class CustomerController extends Controller
         $request->validate([
             'name'=> 'required|string|max:255',
             'email' => ['required','email',Rule::unique('customers')->ignore($customer->id)],
-            'phone' => ['required','string','max:12', 'regex:/^[0-9]+$/',Rule::unique('customers')->ignore($customer->id)],
+            'phone' => ['required','string','min:11','max:12', 'regex:/^[0-9]+$/',Rule::unique('customers')->ignore($customer->id)],
             'address' => ['required','string','max:255'],
         ],
         [
@@ -92,6 +94,8 @@ class CustomerController extends Controller
             'email.unique' => 'This email is already taken',
             'phone.required' => 'Phone number is required',
             'phone.regex' => 'The phone number value cannot be below 0',
+            'phone.min' => 'The phone number value must be more than 11 digits',
+            'phone.max' => 'The phine number value Cannot be more than 11 digits',
             'phone.unique'=> 'This phone number is already taken',
         ]);
         $customer->update($request->all());
