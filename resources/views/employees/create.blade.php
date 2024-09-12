@@ -4,7 +4,7 @@
 <main>
     <div class="container d-flex justify-content-center align-items-center min-vh-100 mt-5 mb-5">
         <div class="col-md-8">
-            <form action="{{ route('employees.store') }}" method="POST">
+            <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card shadow-lg border-0 rounded-4 p-4" style="background-color: #ffffff;">
                     <div class="card-header bg-info text-white text-center rounded-4">
