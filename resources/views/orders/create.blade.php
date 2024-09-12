@@ -14,21 +14,8 @@
                             <h3 class="text-center text-dark">Create Order</h3>
                             <p class="text-muted text-center">Please fill in the form below correctly</p>
 
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            
+                            <x-session/>
+
                             <div class="mb-3">
                                 <label for="customer_id" class="form-label">Customer</label>
                                 <select name="customer_id" class="form-control" id="customer_id">

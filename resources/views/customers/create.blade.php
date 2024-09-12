@@ -14,22 +14,8 @@
                             <h3 class="text-center text-dark">Add New Customer</h3>
                             <p class="text-muted text-center">Please fill in the form below correctly</p>
 
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-
-
+                            <x-session/>
+                            
                             <div class="mb-3">
                                 <label for="name" class="form-label">Customer Name</label>
                                 <div class="input-group">

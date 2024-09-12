@@ -15,21 +15,8 @@
                             <h3 class="text-center text-dark">Edit Payment</h3>
                             <p class="text-muted text-center">Please update the payment details below</p>
 
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            
+                            <x-session/>
+
                             <div class="mb-3">
                                 <label for="order_id" class="form-label">Order</label>
                                 <select name="order_id" id="order_id" class="form-select" required>
