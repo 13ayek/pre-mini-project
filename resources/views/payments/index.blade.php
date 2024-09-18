@@ -44,9 +44,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($payments as $payment)
+                            @foreach ($payments as $index => $payment)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $payments->firstItem() + $index }}</td>
                                     <td>{{ $payment->order->customer->name }}</td>
                                     <td>{{ \Carbon\Carbon::parse($payment->payment_date)->translatedFormat('d M Y') }}</td>
                                     <td>Rp {{ number_format($payment->order->total_price, 2, ',', '.') }}</td>
