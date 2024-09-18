@@ -31,30 +31,31 @@
                     <!-- Employee Cards -->
                     <div class="row">
                         @foreach ($employees as $employee)
-                            <div class="col-md-4 mb-4">
-                                <div class="card shadow-sm border-0 rounded-4 h-100">
-                                    <div class="card-body d-flex flex-column justify-content-between">
+                            <div class="col-md-4 mb-3">
+                                <div class="card shadow p-3 mb-5 bg-body-tertiary rounded border-0 rounded-4 h-100">
+                                    <div class="card-body flex-column justify-content-between p-2">
                                         <div class="text-center">
                                             @if ($employee->image)
                                                 <img src="{{ Storage::url($employee->image) }}" alt="{{ $employee->name }}"
-                                                    class="rounded-circle mb-3"
-                                                    style="width: 200px; height: 200px; object-fit: cover;">
+                                                    class="rounded-circle mb-2"
+                                                    style="width: 120px; height: 120px; object-fit: cover;">
                                             @endif
-                                            <h5 class="card-title fw-bold text-primary">{{ $employee->name }}</h5>
-                                            <p class="card-text mb-1"><strong>Email:</strong> {{ $employee->email }}</p>
+                                            <h5 class="card-title fw-bold text-primary mb-2">{{ \Illuminate\Support\Str::limit($employee->name, 20) }}</h5>
+                                            <p class="card-text mb-1"><strong>Email:</strong> {{ \Illuminate\Support\Str::limit($employee->email, 20) }}</p>
                                             <p class="card-text mb-1"><strong>Phone:</strong> {{ $employee->phone_number }}</p>
-                                            <p class="card-text mb-1"><strong>Position:</strong> {{ $employee->position }}</p>
-                                            <p class="card-text"><strong>Hire Date:</strong> {{ \Carbon\Carbon::parse($employee->hire_date)->translatedFormat('d M Y') }}</p>
+                                            <p class="card-text mb-1"><strong>Position:</strong> {{ \Illuminate\Support\Str::limit($employee->position, 20) }}</p>
+                                            <p class="card-text mb-1"><strong>Hire Date:</strong> {{ \Carbon\Carbon::parse($employee->hire_date)->translatedFormat('d M Y') }}</p>
                                         </div>
-                                        <div class="btn-group mt-3" role="group">
-                                            <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>
+                                        <center><div class="btn-group mt-4 mb-2 ms-2" role="group">
+                                            <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
                                             <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Are you sure you want to delete this employee?');">Delete</button>
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus karyawan ini?');">Delete</button>
                                             </form>
-                                        </div>
+                                        </div></center>
+
                                     </div>
                                 </div>
                             </div>
