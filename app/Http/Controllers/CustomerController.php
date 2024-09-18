@@ -21,7 +21,7 @@ class CustomerController extends Controller
               ->orWhere('address', 'like', '%'. $search .'%');
         }
 
-        $customers = $query->simplePaginate(5);
+        $customers = $query->simplePaginate(6);
 
         return view("customers.index", compact("customers"));
     }

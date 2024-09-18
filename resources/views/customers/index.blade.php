@@ -29,41 +29,32 @@
 
                     <x-session/>
 
-                    <!-- Customer Table -->
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Address</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($customers as $customer)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $customer->name }}</td>
-                                    <td>{{ $customer->email }}</td>
-                                    <td>{{ $customer->phone }}</td>
-                                    <td>{{ $customer->address }}</td>
-                                    <td>
-                                        <a href="{{ route('customers.edit', $customer->id) }}"
-                                            class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="{{ route('customers.destroy', $customer->id) }}" method="POST"
-                                            class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure you want to delete this?');">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <!-- Customer Cards -->
+                    <div class="row">
+                        @foreach ($customers as $customer)
+                            <div class="col-md-4 mb-4">
+                                <div class="card shadow p-3 mb-5 bg-body-tertiary rounded border rounded-4 h-100" style="max-width: 25rem">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold text-primary">{{ $customer->name }}</h5>
+                                        <p class="card-text mb-1"><strong>Email:</strong> {{ $customer->email }}</p>
+                                        <p class="card-text mb-1"><strong>Phone:</strong> {{ $customer->phone }}</p>
+                                        <p class="card-text"><strong>Address:</strong> {{ $customer->address }}</p>
+
+                                        <div class="btn-group mt-3" role="group">
+                                            <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>
+                                            <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this?');">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
                     <div class="pagination mt-3">
                         {{ $customers->links() }}
                     </div>
