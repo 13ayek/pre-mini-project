@@ -42,9 +42,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($orders as $order)
+                            @foreach ($orders as $index => $order)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $orders->firstItem() + $index }}</td>
                                     <td>{{ $order->customer->name }}</td>
                                     <td>{{ $order->service->service_name }}</td>
                                     <td>{{ \Carbon\Carbon::parse($order->order_date)->translatedFormat('d M Y') }}</td>
