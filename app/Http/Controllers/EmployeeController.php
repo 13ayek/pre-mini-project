@@ -18,7 +18,7 @@ class EmployeeController extends Controller
                   ->orWhere('phone_number', 'like', '%' . $search . '%')
                   ->orWhere('position', 'like', '%' . $search . '%');
         }
-        $employees = $query->simplePaginate(5);
+        $employees = $query->simplePaginate(6);
         return view("employees.index", compact("employees"));
     }
 
