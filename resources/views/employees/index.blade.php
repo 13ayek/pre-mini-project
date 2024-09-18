@@ -40,11 +40,11 @@
                                                     class="rounded-circle mb-2"
                                                     style="width: 120px; height: 120px; object-fit: cover;">
                                                 <!-- Button trigger modal -->
-                                                <a href="#" data-bs-toggle="modal"
+                                                {{-- <a href="#" data-bs-toggle="modal"
                                                     data-bs-target="#imageModal-{{ $employee->id }}">
                                                     <i class="fas fa-search-plus" style="cursor: pointer;"></i>
-                                                </a>
-                                                @foreach ($employees as $employee)
+                                                </a> --}}
+                                                {{-- @foreach ($employees as $employee)
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="imageModal-{{ $employee->id }}"
                                                         tabindex="-1" aria-labelledby="imageModalLabel-{{ $employee->id }}"
@@ -66,8 +66,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endforeach
+                                                @endforeach --}}
+                                            @else
+                                                <img src="{{ asset('storage/default.png') }}" alt="Default Image"
+                                                class="rounded-circle mb-2"
+                                                style="width: 120px; height: 120px; object-fit: cover;">
                                             @endif
+
                                             <h5 class="card-title fw-bold text-primary mb-2">
                                                 {{ \Illuminate\Support\Str::limit($employee->name, 20) }}</h5>
                                             <p class="card-text mb-1"><strong>Email:</strong>
