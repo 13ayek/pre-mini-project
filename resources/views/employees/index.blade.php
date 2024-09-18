@@ -39,22 +39,60 @@
                                                 <img src="{{ Storage::url($employee->image) }}" alt="{{ $employee->name }}"
                                                     class="rounded-circle mb-2"
                                                     style="width: 120px; height: 120px; object-fit: cover;">
+                                                <!-- Button trigger modal -->
+                                                <a href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#imageModal-{{ $employee->id }}">
+                                                    <i class="fas fa-search-plus" style="cursor: pointer;"></i>
+                                                </a>
+                                                @foreach ($employees as $employee)
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="imageModal-{{ $employee->id }}"
+                                                        tabindex="-1" aria-labelledby="imageModalLabel-{{ $employee->id }}"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="imageModalLabel-{{ $employee->id }}">
+                                                                        {{ $employee->name }}</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body text-center">
+                                                                    <img src="{{ Storage::url($employee->image) }}"
+                                                                        alt="{{ $employee->name }}"
+                                                                        class="img-fluid rounded">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             @endif
-                                            <h5 class="card-title fw-bold text-primary mb-2">{{ \Illuminate\Support\Str::limit($employee->name, 20) }}</h5>
-                                            <p class="card-text mb-1"><strong>Email:</strong> {{ \Illuminate\Support\Str::limit($employee->email, 20) }}</p>
-                                            <p class="card-text mb-1"><strong>Phone:</strong> {{ $employee->phone_number }}</p>
-                                            <p class="card-text mb-1"><strong>Position:</strong> {{ \Illuminate\Support\Str::limit($employee->position, 20) }}</p>
-                                            <p class="card-text mb-1"><strong>Hire Date:</strong> {{ \Carbon\Carbon::parse($employee->hire_date)->translatedFormat('d M Y') }}</p>
+                                            <h5 class="card-title fw-bold text-primary mb-2">
+                                                {{ \Illuminate\Support\Str::limit($employee->name, 20) }}</h5>
+                                            <p class="card-text mb-1"><strong>Email:</strong>
+                                                {{ \Illuminate\Support\Str::limit($employee->email, 20) }}</p>
+                                            <p class="card-text mb-1"><strong>Phone:</strong> {{ $employee->phone_number }}
+                                            </p>
+                                            <p class="card-text mb-1"><strong>Position:</strong>
+                                                {{ \Illuminate\Support\Str::limit($employee->position, 20) }}</p>
+                                            <p class="card-text mb-1"><strong>Hire Date:</strong>
+                                                {{ \Carbon\Carbon::parse($employee->hire_date)->translatedFormat('d M Y') }}
+                                            </p>
                                         </div>
-                                        <center><div class="btn-group mt-4 mb-2 ms-2" role="group">
-                                            <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
-                                            <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus karyawan ini?');">Delete</button>
-                                            </form>
-                                        </div></center>
+                                        <center>
+                                            <div class="btn-group mt-4 mb-2 ms-2" role="group">
+                                                <a href="{{ route('employees.edit', $employee->id) }}"
+                                                    class="btn btn-warning btn-sm me-1">Edit</a>
+                                                <form action="{{ route('employees.destroy', $employee->id) }}"
+                                                    method="POST" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus karyawan ini?');">Delete</button>
+                                                </form>
+                                            </div>
+                                        </center>
 
                                     </div>
                                 </div>

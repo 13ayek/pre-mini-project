@@ -122,9 +122,8 @@ class EmployeeController extends Controller
 
     public function destroy(Employee $employee)
     {
-        if ($employee->employeeAssignments()->exists()) {
-            return redirect()->route('employees.index')
-                             ->withErrors('Employee cannot be deleted because they still have Contract.');
+        if ($employee->image) {
+            Storage::disk('public')->delete($employee->image);
         }
         $employee->delete();
         return redirect()->route('employees.index')->with('success', 'Employee Deleted Successfully');
