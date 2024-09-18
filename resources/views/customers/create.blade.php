@@ -27,7 +27,7 @@
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone</label>
                                 <div class="input-group">
-                                    <input type="text" name="phone" class="form-control" id="phone"
+                                    <input type="number" name="phone" class="form-control" id="phone"
                                         placeholder="Enter phone number" value="{{ old('phone') }}">
                                 </div>
                             </div>
