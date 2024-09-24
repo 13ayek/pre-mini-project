@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Employee;
+use App\Models\EmployeeAssignment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -122,8 +123,11 @@ class EmployeeController extends Controller
 
     public function destroy(Employee $employee)
     {
-        if ($employee->image) {
-            Storage::disk('public')->delete($employee->image);
+        if ($employee->EmployeeAssignments()->exists()) {
+            return redirect()->route('employees.index')->withErrors('Employee cannot be deleted because still have assignment');
+            if ($employee->image) {
+                Storage::disk('public')->delete($employee->image);
+            }
         }
         $employee->delete();
         return redirect()->route('employees.index')->with('success', 'Employee Deleted Successfully');
