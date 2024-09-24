@@ -74,13 +74,14 @@
                                             @endif
 
                                             <h5 class="card-title fw-bold text-primary mb-2">
-                                                {{ \Illuminate\Support\Str::limit($employee->name, 20) }}</h5>
+                                                {{ ($employee->name) }}</h5>
                                             <p class="card-text mb-1"><strong>Email:</strong>
-                                                {{ \Illuminate\Support\Str::limit($employee->email, 20) }}</p>
-                                            <p class="card-text mb-1"><strong>Phone:</strong> {{ $employee->phone_number }}
+                                                {{ ($employee->email) }}</p>
+                                            <p class="card-text mb-1"><strong>Phone:</strong>
+                                                {{ $employee->phone_number }}
                                             </p>
                                             <p class="card-text mb-1"><strong>Position:</strong>
-                                                {{ \Illuminate\Support\Str::limit($employee->position, 20) }}</p>
+                                                {{ ($employee->position) }}</p>
                                             <p class="card-text mb-1"><strong>Hire Date:</strong>
                                                 {{ \Carbon\Carbon::parse($employee->hire_date)->translatedFormat('d M Y') }}
                                             </p>
