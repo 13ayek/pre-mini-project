@@ -69,17 +69,9 @@
 
                             <div class="mb-3">
                                 <label for="status" class="form-label">Status</label>
-                                <select name="status" class="form-control" id="status">
-                                    <option value="" disabled selected>Select Status</option>
-                                    <option value="Pending" {{ old('status') == 'Pending' ? 'selected' : '' }}>Pending
-                                    </option>
-                                    <option value="In Progress" {{ old('status') == 'In Progress' ? 'selected' : '' }}>In
-                                        Progress</option>
-                                    <option value="Completed" {{ old('status') == 'Completed' ? 'selected' : '' }}>
-                                        Completed</option>
-                                    <option value="Cancelled" {{ old('status') == 'Cancelled' ? 'selected' : '' }}>
-                                        Cancelled</option>
-                                </select>
+                                    <input value="Pending" class="form-control" readonly {{ old('status') == 'Pending' ? 'selected' : '' }}>
+                                </input>
+
                             </div>
 
                             <div class="justify-content-between mt-4">

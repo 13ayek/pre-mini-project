@@ -51,6 +51,11 @@ class PaymentController extends Controller
 
         $order = Order::find($request->order_id);
 
+        if ($request->amount < $order->total_price) {
+            // Jika amount kurang dari total price, kembalikan error
+            return redirect()->back()->withErrors(['amount' => 'The payment amount cannot be less than the total order price.'])->withInput();
+        }
+        
         Payment::create([
             'order_id' => $request->order_id,
             'payment_method' => $request->payment_method,
