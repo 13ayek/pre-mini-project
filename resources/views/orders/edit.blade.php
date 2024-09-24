@@ -16,7 +16,7 @@
                             <p class="text-muted text-center">Please update the details below</p>
 
                             <x-session/>
-                            
+
                             @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
@@ -53,20 +53,32 @@
 
                             <div class="mb-3">
                                 <label for="item_name" class="form-label">Item Name</label>
+                                @foreach ($laundryItems as $item)
+
                                 <input type="text" name="item_name" class="form-control" id="item_name"
-                                    value="{{ $order->item_name }}">
+                                    value="{{ $item->item_name }}">
+
+                                @endforeach
                             </div>
 
                             <div class="mb-3">
                                 <label for="quantity" class="form-label">Quantity</label>
+                                @foreach ($laundryItems as $item)
+
                                 <input type="number" name="quantity" class="form-control" id="quantity"
-                                    value="{{ $order->quantity }}">
+                                    value="{{ $item->quantity }}">
+
+                                @endforeach
                             </div>
 
                             <div class="mb-3">
                                 <label for="weight" class="form-label">Weight (kg)</label>
+                                @foreach ($laundryItems as $item)
+
                                 <input type="number" name="weight" class="form-control" id="weight"
-                                    value="{{ $order->weight }}">
+                                    value="{{ $item->weight }}">
+
+                                @endforeach
                             </div>
 
                             <div class="mb-3">
